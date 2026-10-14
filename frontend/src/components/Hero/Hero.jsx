@@ -100,7 +100,7 @@ const Hero = () => {
                     </div>
 
                     {/* Mobile image (same slides, cross-fade) */}
-                    <div className="block lg:hidden mt-6 mb-6 relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_-25px_45px_-10px_rgba(255,0,0,0.15)] md:hidden">
+                    <div className="block lg:hidden mt-6 mb-6 relative w-full aspect-[3/2] rounded-[2rem] overflow-hidden shadow-[0_-25px_45px_-10px_rgba(255,0,0,0.15)] md:hidden">
                         {SLIDES.map((s, i) => (
                             <img
                                 key={s.src}
@@ -176,7 +176,7 @@ const Hero = () => {
                                     {slide.caption}
                                 </p>
                                 <p
-                                    className="text-[#f4efe7] text-[0.7rem] font-bold md:font-medium tracking-wide lg:text-end text-justify"
+                                    className="text-[#f4efe7] text-[0.7rem] font-bold md:font-medium tracking-wide md:text-end"
                                     style={{ textShadow: '2px 2px 4px #000' }}
                                 >
                                     Kapadokya Üniversitesi—Kütüphane ve Dokümantasyon Daire Başkanlığı. Mustafapaşa ve Ürgüp yerleşkelerinde.

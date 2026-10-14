@@ -85,6 +85,27 @@ const MainLayout = () => {
         gsap.fromTo(outletRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: "power2.out" });
     }, { dependencies: [pathname] });
 
+    // Any section that changes size after the triggers were measured (responsive line sets,
+    // late fonts, filtered lists) would leave the pins below it misplaced: re-measure, debounced.
+    useEffect(() => {
+        let t;
+        const refresh = () => { clearTimeout(t); t = setTimeout(() => ScrollTrigger.refresh(), 150); };
+        const sizes = new WeakMap();
+        const ro = new ResizeObserver((entries) => {
+            let changed = false;
+            for (const e of entries) {
+                const h = Math.round(e.contentRect.height);
+                if (sizes.has(e.target) && sizes.get(e.target) !== h) changed = true;
+                sizes.set(e.target, h);
+            }
+            if (changed) refresh();
+        });
+        const sections = document.querySelectorAll("#icerik > div > div > *, #icerik > footer");
+        sections.forEach((s) => ro.observe(s));
+        document.fonts?.ready.then(refresh);
+        return () => { ro.disconnect(); clearTimeout(t); };
+    }, [pathname]);
+
     // Late-loading images change section heights; re-measure the scroll triggers once they settle.
     useEffect(() => {
         let t;

@@ -1,6 +1,7 @@
 import gsap, { ScrollTrigger, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import { activeTrials, countByType, media } from "../../lib/content";
 
@@ -39,7 +40,11 @@ const StickyCols = () => {
 
     const [reveal, setReveal] = useState(false);
 
+    // Phones get stacked cards; the four-column pinned sequence needs a wide viewport.
+    const isMob = useMediaQuery({ maxWidth: 768 });
+
     useGSAP(() => {
+        if (isMob) return;
         gsap.registerPlugin(ScrollTrigger, SplitText);
 
         // 1️⃣ Split text lines once DOM ready
@@ -103,10 +108,33 @@ const StickyCols = () => {
             tl.scrollTrigger?.kill();
             tl.kill();
         };
-    });
+    }, { dependencies: [isMob], revertOnUpdate: true });
 
     // Each card is a link to its collection; the middle card switches target with the phase.
     const phase2 = reveal ? PHASES[2] : PHASES[1];
+
+    if (isMob) {
+        const imgs = [colimg1, colimg2, colimg3];
+        return (
+            <section aria-label="Elektronik kaynaklar" className="px-2 pb-16 flex flex-col gap-2">
+                {PHASES.map((p, i) => (
+                    <Link key={p.to} to={p.to} className="grid grid-cols-1 gap-2">
+                        <div className="rounded-[2.5rem] bg-[#2a2725] p-6 min-h-[16rem] flex flex-col justify-between gap-8">
+                            <h3 className="text-3xl text-[#b1a696] font-bold leading-[1.05]">{p.lines.map((l, j) => <span key={j} className="block">{l}</span>)}</h3>
+                            <div className="flex items-end justify-between gap-4">
+                                <div className="flex shrink-0" aria-hidden="true">
+                                    <span className="border-1 px-3 py-1 rounded-full text-[#aaa091]">{i + 1}</span>
+                                    <span className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</span>
+                                </div>
+                                <p className="text-[12px] font-medium text-[#b1a696] text-right">{p.text}</p>
+                            </div>
+                        </div>
+                        <img src={imgs[i]} alt="" loading="lazy" className="w-full h-56 object-cover rounded-[2.5rem]" />
+                    </Link>
+                ))}
+            </section>
+        );
+    }
 
     return (
         <section className="sticky-cols w-screen h-dvh overflow-hidden bg-[#181717] lg:mb-20" aria-label="Elektronik kaynaklar">

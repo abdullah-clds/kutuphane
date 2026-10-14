@@ -15,6 +15,11 @@ const MarqueeSticky = () => {
                 start: "bottom 80%",
                 end: "bottom 50%",
                 scrub: 1,
+                // The spacer collapse below moves every later section up by 20vh. Re-measure once it has
+                // fully collapsed / fully re-expanded so later pins and reveals use the real positions
+                // (the original compensated with a hand-tuned offset in Showcase).
+                onLeave: () => ScrollTrigger.refresh(),
+                onLeaveBack: () => ScrollTrigger.refresh(),
                 // markers: true,
             },
         });

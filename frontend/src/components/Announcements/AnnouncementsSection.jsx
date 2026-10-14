@@ -95,10 +95,11 @@ const AnnouncementsSection = () => {
                         {/* Recent titles: two compact columns */}
                         <div className="lg:col-span-7 flex flex-col">
                         <ol className="grid sm:grid-cols-2 gap-x-6 content-start">
-                            {list.map((a) => {
+                            {list.map((a, i) => {
                                 const status = announcementStatus(a);
                                 return (
-                                    <li key={a.slug} data-ann className="border-b border-[#2a2725]/12">
+                                    // Phones show the first four; the archive link covers the rest.
+                                    <li key={a.slug} data-ann className={`border-b border-[#2a2725]/12 ${i >= 4 ? "hidden sm:block" : ""}`}>
                                         <Link to={`/duyurular/${a.slug}`} className="group flex items-start gap-3 py-3.5">
                                             <span className="flex-1 min-w-0">
                                                 <span className="flex items-center gap-2 text-[0.7rem] text-[#8a7f70]">

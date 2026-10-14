@@ -5,6 +5,7 @@ import './gallery.css';
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import { libraries, media } from '../../lib/content';
 
 // The three libraries, in the order of the "Kütüphanelerimiz" page. Photos are the
@@ -31,7 +32,11 @@ gsap.registerPlugin(ScrollTrigger);
 const Gallery = () => {
     const pageRef = useRef(null);
 
+    // Phones get a stacked layout; the pinned desktop sequence needs a wide viewport.
+    const isMob = useMediaQuery({ maxWidth: 768 });
+
     useEffect(() => {
+        if (isMob) return;
 
         // document.fonts.ready.then(() => {
         // Create new timeline
@@ -112,7 +117,7 @@ const Gallery = () => {
             tl4.scrollTrigger?.kill();
             tl4.kill();
         };
-    }, []);
+    }, [isMob]);
 
     // Generate repeating marquee words
     const generateCapsules = (quantity = 6) => {
@@ -126,6 +131,31 @@ const Gallery = () => {
         }
         return capsules;
     };
+
+    if (isMob) {
+        return (
+            <section id="kutuphanelerimiz" aria-label="Kütüphanelerimiz" className="px-2 pt-10 pb-16 bg-gradient-to-b from-[#2b2825] to-[#181717]">
+                <p className="px-6 text-[.7rem] font-bold text-[#eae5dd]">Kütüphanelerimiz</p>
+                <div className="mt-6 flex flex-col gap-2">
+                    {LIBRARIES.map((lib, i) => (
+                        <Link key={lib.name} to={`/kutuphanelerimiz#${lib.slug}`} className="relative block h-[72vh] rounded-[2.5rem] overflow-hidden">
+                            <img src={lib.image} alt={lib.alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover brightness-[0.72]" />
+                            <div className="absolute top-6 left-5 right-5 text-[#f4efe7]">
+                                <h3 className="text-4xl font-semibold leading-[0.95] tracking-tight">{lib.name}</h3>
+                                <p className="mt-2 text-lg font-semibold">({lib.campus})</p>
+                            </div>
+                            <div className="absolute bottom-6 left-5 right-5 text-[#f4efe7] flex flex-col gap-4">
+                                <p className="text-[0.8rem] font-semibold leading-snug">{lib.text}<br />{lib.hours}</p>
+                                <div className="relative w-full h-[0.1rem] bg-[#4f4b48]">
+                                    <div className={`absolute left-0 top-0 h-full bg-[#f4efe7] ${PROGRESS[i]}`} />
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="gallery-page4" ref={pageRef} id="kutuphanelerimiz" aria-label="Kütüphanelerimiz">

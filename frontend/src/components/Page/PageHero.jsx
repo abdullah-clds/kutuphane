@@ -52,8 +52,9 @@ const PageHero = ({ title, eyebrow, crumbs = [], image, imageAlt = "", contain =
                 {image && contain && (
                     <>
                         <img src={media(image)} alt="" aria-hidden="true" className="page-hero-img absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110" />
-                        <div className="absolute inset-0 flex items-center justify-center p-6 md:p-16 pb-[45%] md:pb-[14%]">
-                            <img src={media(image)} alt={imageAlt} className="max-h-full max-w-full md:max-w-[55%] object-contain rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.45)]" />
+                        {/* Graphic on the right half (top on mobile), title keeps the left half */}
+                        <div className="absolute inset-x-0 top-0 h-[48%] md:h-auto md:inset-y-0 md:left-auto md:right-0 md:w-[44%] flex items-center justify-center p-6 pt-24 md:p-12 md:pt-24">
+                            <img src={media(image)} alt={imageAlt} className="max-h-full max-w-full object-contain rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.45)]" />
                         </div>
                     </>
                 )}
@@ -74,9 +75,9 @@ const PageHero = ({ title, eyebrow, crumbs = [], image, imageAlt = "", contain =
                 )}
 
                 <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                    <div className="md:max-w-[72%]">
+                    <div className={contain ? "md:max-w-[52%]" : "md:max-w-[72%]"}>
                         {eyebrow && <p data-hero-fade className="text-[0.7rem] font-bold text-[#eae5dd] mb-4">{eyebrow}</p>}
-                        <h1 className="text-[#f4efe7] font-bold tracking-tight leading-[0.95] text-[clamp(2.4rem,6.4vw,7rem)] [text-wrap:balance]" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}>
+                        <h1 className={`text-[#f4efe7] font-bold tracking-tight leading-[0.95] [text-wrap:balance] ${String(title).length > 55 ? "text-[clamp(1.9rem,3.6vw,3.9rem)] leading-[1.02]" : contain ? "text-[clamp(2.2rem,4.8vw,5rem)]" : "text-[clamp(2.4rem,6.4vw,7rem)]"}`} style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}>
                             {title}
                         </h1>
                     </div>

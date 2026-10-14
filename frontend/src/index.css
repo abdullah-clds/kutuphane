@@ -166,6 +166,14 @@ body {
 		top: 33%;
 	}
 
+	/* Hero slider: the slide stack has no intrinsic width (the theme used a single <img>),
+	   and the library texts are taller, so the image sits above the menu pill instead. */
+	.hero-section .responsive-mobile {
+		top: auto;
+		left: 0;
+		right: 0;
+		bottom: 4.25rem;
+	}
 }
 
 /* -------------- Choose Section Styles ----------------- */
