@@ -9,7 +9,6 @@ import PreloaderII from "../components/Preloader/PreloaderII";
 import ReserveBtn from "../components/Buttons/ReserveBtn";
 import Logo from "../components/Buttons/Logo";
 import Footer from "../components/Footer/Footer";
-import FooterTitle from "../components/Footer/FooterTitle";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -132,7 +131,6 @@ const MainLayout = () => {
                             <Outlet />
                         </div>
                         <Footer />
-                        <FooterTitle />
                     </main>
                 </div>
             </div>

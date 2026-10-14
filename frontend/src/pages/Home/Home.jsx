@@ -1,26 +1,34 @@
 import React from 'react'
 import Hero from '../../components/Hero/Hero'
-import Welcome from '../../components/Welcome/Welcome'
-import Choose from '../../components/Choose/Choose'
-import StickyCols from '../../components/StickyCols/StickyCols'
 import Gallery from '../../components/Gallery/Gallery'
-import MarqueeSticky from '../../components/Layouts/MarqueeSticky'
-import AnnouncementsSection from '../../components/Announcements/AnnouncementsSection'
-import ServicesStrip from '../../components/Services/ServicesStrip'
+import SearchBand from '../../components/Home/SearchBand'
+import NewsBoard from '../../components/Home/NewsBoard'
+import ResourceGrid from '../../components/Home/ResourceGrid'
+import ResearchBand from '../../components/Home/ResearchBand'
 
-// Compact homepage (see docs/SECTION-MAPPING.md). Activities, Showcase, Feedback, MapLink and
-// FooterBanner are no longer on the homepage; their content lives on the inner pages.
+// Institutional homepage (docs/SECTION-MAPPING.md): the photo slider, then light "paper" panels with
+// search, announcements and resources; the libraries photo band (Gallery) stays dark in between.
+const Paper = ({ children }) => (
+    <div className="px-2">
+        <div className="kun-paper rounded-[2.5rem] px-6 md:px-10 lg:px-14 py-12 md:py-16 flex flex-col gap-16 md:gap-20">
+            {children}
+        </div>
+    </div>
+)
+
 const Home = () => {
     return (
         <div>
             <Hero />
-            <Welcome />
-            <AnnouncementsSection />
-            <Choose />
+            <Paper>
+                <SearchBand />
+                <NewsBoard />
+                <ResourceGrid />
+            </Paper>
             <Gallery />
-            <MarqueeSticky />
-            <StickyCols />
-            <ServicesStrip />
+            <Paper>
+                <ResearchBand />
+            </Paper>
         </div >
     )
 }

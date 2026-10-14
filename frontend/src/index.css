@@ -507,3 +507,25 @@ body {
 @keyframes kun-hero-progress {
 	to { width: 100%; }
 }
+
+/* Institutional homepage panels (light "paper" set into the dark page) */
+.kun-paper {
+	background: #f6f3ee;
+	color: #1f2937;
+}
+
+.kun-eyebrow {
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: #8a6d45;
+}
+
+.kun-h2 {
+	font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: -0.01em;
+	color: #002856;
+}

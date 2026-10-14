@@ -80,7 +80,7 @@ const Hero = () => {
             ref={sectionRef}
             aria-roledescription="carousel"
             aria-label="Kütüphanelerimizden görüntüler"
-            className="hero-section w-dvw md:h-dvh h-[100vh] md:p-2 p-2.5 mb-20"
+            className="hero-section w-dvw md:h-dvh h-[100vh] md:p-2 p-2.5"
         >
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
                 <div className="responsive-mobile">
