@@ -59,6 +59,27 @@ const CORRECTIONS = [
   { where: "Mesvera Yapay Zeka Platformu", from: "mesvera.com", to: "https://mesvera.com", ref: "LINK-4" },
 ];
 
+// Formatting-only repairs (wording unchanged), CONTENT-ISSUES #FMT-1.
+const FORMAT_FIXES = {
+  "odunc-alma-ve-odunc-sartlari": (md) => {
+    const start = md.indexOf("**a)");
+    const end = md.indexOf("-Ödünç kitap alırken");
+    if (start < 0 || end < 0) return md;
+    let seg = md.slice(start, end).replace(/\*\*/g, "");
+    const joins = [
+      ["öğrencileribir", "öğrencileri bir"], ["bir kez30", "bir kez 30"], ["bir kez15", "bir kez 15"],
+      ["yayınalabilirler", "yayın alabilirler"], ["süreylegerçekleştirilir", "süreyle gerçekleştirilir"],
+      ["gerçekleştirilir.Üst", "gerçekleştirilir. Üst"], ["15gün", "15 gün"],
+      ["gerçekleştirilir.Ödünç", "gerçekleştirilir. Ödünç"], ["yararlanamaz.d)", "yararlanamaz.\n\nd)"],
+    ];
+    for (const [a, b] of joins) seg = seg.split(a).join(b);
+    for (const label of ["a) Akademik personel ile yüksek lisans/doktora öğrencileri", "b) Ön lisans ve lisans öğrencileri", "c) Mezunlar,", "d) İdari personel,"])
+      seg = seg.replace(label, `**${label}**`);
+    // "-Text" paragraphs are the page's rule items: render them as a list.
+    return (md.slice(0, start) + seg + md.slice(end)).replace(/^-(?=\S)/gm, "- ");
+  },
+};
+
 // ---------------------------------------------------------------- helpers
 const TR_MONTHS = { ocak: 1, şubat: 2, mart: 3, nisan: 4, mayıs: 5, haziran: 6, temmuz: 7, ağustos: 8, eylül: 9, ekim: 10, kasım: 11, aralık: 12 };
 const pad = (n) => String(n).padStart(2, "0");
@@ -311,7 +332,8 @@ const pageOut = pages
   .map(({ meta, body }) => {
     const directory = DIRECTORY_TYPES[meta.slug] ?? null;
     // Directory pages keep any prose that precedes the first card (none at the moment).
-    const md = rewriteMarkdown(directory ? body.split(/^!\[|^####/m)[0] : body);
+    const fixed = FORMAT_FIXES[meta.slug] ? FORMAT_FIXES[meta.slug](body) : body;
+    const md = rewriteMarkdown(directory ? fixed.split(/^!\[|^####/m)[0] : fixed);
     return {
       route: PAGE_ROUTES[meta.slug],
       oldSlug: meta.slug,

@@ -1,45 +1,22 @@
-# 🏆 Capsule - Awwwards SOTD Clone
+# Kapadokya Üniversitesi Kütüphanesi
 
-![Capsule Showcase](https://raw.githubusercontent.com/ShowravKormokar/capsule/refs/heads/main/frontend/src/assets/showcase-img.png)
+kutuphane.kapadokya.edu.tr için yeni site. Tasarım ve hareket dili **Capsule** temasından (React + Vite + Tailwind 4 + GSAP ScrollSmoother/ScrollTrigger) korunarak, eski WordPress sitesinin tüm içeriği taşındı.
 
+```bash
+cd frontend
+npm ci
+npm run dev       # geliştirme
+npm run build     # içerik derlemesi (Markdown → JSON) + üretim paketi → frontend/dist
+```
 
-# > ⚠️ **This Website Is Still Under Construction. Not fully responsive yet. Try to see in desktop mode (1200px to 1900px width). Thanks🚨☠️**
+| Klasör | İçerik |
+|---|---|
+| `content/site-icerigi/` | Eski siteden çıkarılmış sayfa/duyuru/hizmet Markdown'ları: **içeriğin tek kaynağı** |
+| `content/gorseller/` | Kurumdan sağlanan görseller (logo, amblem, kütüphane fotoğrafları) |
+| `frontend/scripts/build-content.mjs` | Markdown → `src/data/*.json`; bağlantı ve biçim düzeltmeleri burada, belgeli |
+| `frontend/public/media/` | Yedekten çıkarılan görseller ve belgeler |
+| `docs/` | Denetim, içerik envanteri, içerik sorunları, bölüm eşlemesi, animasyon regresyonu, taşıma durumu |
 
-A faithful React.js clone of the **"awwwards"** ([Awwwards.com](https://www.awwwards.com/sites/capsules-r)) SOTD-winning **"Capsule"** website by Moyra ([capsule.moyra.co](https://capsule.moyra.co)), which won Awwwards Site of the Day. This project was built for learning purposes to master advanced frontend techniques like scroll-triggered animations, smooth page transitions, and responsive design.
-- React Vite (version: 19.1.0)
-- React Router Dom (Version: 7.6.2)
-- Tailwind CSS (Version: 4.1.8)
-- GSAP (Version: 2.1.2)
+İçerik güncellemek için ilgili Markdown dosyasını düzenleyip `npm run build` çalıştırın. Sunucu, bilinmeyen yolları `index.html`'e yönlendirmelidir (tek sayfalık uygulama).
 
-## 🚀 Live Demo
-
-[View Live Project](https://showravkormokar.github.io/capsule/)
-
-## ✨ Features
-
-- **Smooth Animations:** Recreated the sophisticated scroll-driven animations from the original site using GSAP.
-- **Modern Stack:** Built with a cutting-edge tech stack including React, Vite, and Tailwind CSS.
-- **Fully Responsive:** Designed to provide a seamless experience across all device sizes.
-- **Pixel-Perfect UI:** Focused on replicating the original design's visual appeal and user interface details.
-
-## 🛠️ Tech Stack
-
-- **Frontend Framework:** [React](https://reactjs.org/) with [Vite](https://vitejs.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** [GSAP (GreenSock Animation Platform)](https://gsap.com/)
-- **Icons:** [React Icons](https://react-icons.github.io/react-icons/)
-- **Package Manager:** npm / yarn
-
-## 📦 Installation & Setup
-
-To run this project locally, follow these steps:
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/showravkormokar/capsule.git
-   cd capsule
-
-## 🪧 Notice
-
-To build this website only study perpose and understanding animation and increase design knowledge.
-All rights reserve ([capsule.moyra.co](https://capsule.moyra.co))
+Tema: "Capsule", Moyra'nın Awwwards SOTD sitesinin ShowravKormokar tarafından yapılmış React klonu (öğrenme amaçlı klon; bkz. orijinal README geçmişi `git show 7457a99:README.md`). Kurumsal kullanımdan önce temanın lisans/kullanım koşulları kurumca değerlendirilmelidir.
