@@ -35,14 +35,14 @@ const MarqueeSticky = () => {
             <div className="pin-con relative">
                 <div className="pl-8">
                     <p className="text-[0.7rem] text-[#eae5dd] choose-subtitle">
-                        Want to learn more about
+                        Abone olunan, açık erişimli ve
                         <br />
-                        the benefits of—Capsules<span>®</span>?
+                        deneme erişimli veri tabanları—
                     </p>
                 </div>
 
                 <div className="marquee-con-none absolute top-0 -z-1">
-                    <MarqueeText />
+                    <MarqueeText text="Elektronik Kaynaklar" />
                 </div>
 
                 {/* SPACE RESERVER — extremely important */}

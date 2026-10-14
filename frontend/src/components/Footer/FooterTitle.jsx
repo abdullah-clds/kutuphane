@@ -69,22 +69,22 @@ const FooterTitle = () => {
     }, { scope: ftConRef });
 
     return (
-        <section ref={ftConRef} className='relative z-1 w-screen h-[40vh] border-1 border-t-[#c4c1b9]'>
-            <div className='w-full flex justify-between items-center px-6 mt-8'>
+        <section ref={ftConRef} className='relative z-1 w-full h-[40vh] border-t border-t-[#c4c1b9]'>
+            <div className='w-full flex md:flex-row flex-col justify-between md:items-center gap-1 px-6 mt-8'>
                 <p className='text-[#b1a696] text-[0.7rem]'>
-                    Website made by—<a href="#" className='text-[#f2ede5]'>Moyra.co</a>
+                    Kapadokya Üniversitesi—<a href="https://kapadokya.edu.tr/" target="_blank" rel="noopener noreferrer" className='text-[#f2ede5]'>kapadokya.edu.tr</a>
                 </p>
                 <p className='text-[#b1a696] text-[0.7rem]'>
-                    This website is using <a href="#" className='text-[#f2ede5]'>cookies</a>
+                    Kütüphane ve Dokümantasyon Daire Başkanlığı
                 </p>
                 <p className='text-[#b1a696] text-[0.7rem]'>
-                    All rights reserved © <a href="#" className='text-[#f2ede5]'>2025</a>
+                    Tüm hakları saklıdır © <span className='text-[#f2ede5]'>{new Date().getFullYear()}</span>
                 </p>
             </div>
 
-            <div className='footer-title w-full text-center'>
+            <div className='footer-title w-full text-center' aria-hidden="true">
                 <h1 className='text-[18vw] font-bold'>
-                    Capsules<sub>®</sub>
+                    Kütüphane
                 </h1>
             </div>
         </section>

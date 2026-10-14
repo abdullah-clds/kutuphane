@@ -1,9 +1,39 @@
 import gsap, { ScrollTrigger, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
-import colimg1 from "../../assets/cap1-square.jpg";
-import colimg2 from "../../assets/cap2-square.jpg";
-import colimg3 from "../../assets/cap3-square.jpg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { activeTrials, countByType, media } from "../../lib/content";
+
+const colimg1 = media("media/site/iki-katli-salon.jpg");
+const colimg2 = media("media/site/okuma-salonu.jpg");
+const colimg3 = media("media/site/kutup-banner.jpg");
+
+// Three collections, in the order of the previous "Elektronik Kaynaklar" menu. Counts come from the migrated records.
+const PHASES = [
+    {
+        title: "Abone Olunan Veri Tabanları",
+        lines: ["Abone olunan", "veri tabanları", `· ${countByType("abone")} kaynak`],
+        count: countByType("abone"),
+        to: "/abone-olunan-veri-tabanlari",
+        // "Kütüphanelerimiz" page
+        text: "Öğrencilerimiz ve öğretim elemanlarımız veri tabanlarından 7 gün 24 saat yararlanabilmektedir.",
+    },
+    {
+        title: "Açık Erişimli Veri Tabanları",
+        lines: ["Açık erişimli", "veri tabanları", `· ${countByType("acik")} kaynak`],
+        count: countByType("acik"),
+        to: "/acik-erisimli-veri-tabanlari",
+        // "Yerleşke Dışı Erişim" page
+        text: "Yerleşke dışından erişim, internet imkanı olan her yerden sağlanabilmektedir.",
+    },
+    {
+        title: "Deneme Erişimli Veri Tabanları",
+        lines: ["Deneme erişimli", "veri tabanları", `· ${activeTrials().length} etkin deneme`],
+        count: activeTrials().length,
+        to: "/deneme-erisimli-veri-tabanlari",
+        text: "Son erişim tarihleri her kaynağın kartında ve ilgili duyuruda yer almaktadır.",
+    },
+];
 
 const StickyCols = () => {
 
@@ -13,7 +43,7 @@ const StickyCols = () => {
         gsap.registerPlugin(ScrollTrigger, SplitText);
 
         // 1️⃣ Split text lines once DOM ready
-        const textElements = document.querySelectorAll(".col-3 h1, .col-3 p");
+        const textElements = document.querySelectorAll(".col-3 h3, .col-3 p");
         textElements.forEach((element) => {
             const split = new SplitText(element, { type: "lines", linesClass: "line" });
             split.lines.forEach((line) => {
@@ -67,98 +97,73 @@ const StickyCols = () => {
                 duration: 0.8,
             }, "<");
 
+        // useGSAP reverts this section's triggers and splits; the original also killed
+        // every other ScrollTrigger on the page here, which broke route changes.
         return () => {
-            ScrollTrigger.getAll().forEach((st) => st.kill());
+            tl.scrollTrigger?.kill();
             tl.kill();
         };
     });
 
+    // Each card is a link to its collection; the middle card switches target with the phase.
+    const phase2 = reveal ? PHASES[2] : PHASES[1];
+
     return (
-        <section className="sticky-cols w-screen h-dvh overflow-hidden bg-[#181717] lg:mb-20">
+        <section className="sticky-cols w-screen h-dvh overflow-hidden bg-[#181717] lg:mb-20" aria-label="Elektronik kaynaklar">
             <div className="sticky-cols-wrapper relative w-full h-screen">
-                <div className="col col-1">
+                <Link to={PHASES[0].to} className="col col-1 block" aria-label={`${PHASES[0].title}: ${PHASES[0].count} kaynak`}>
                     <div className="col-content">
                         <div className="col-content-wrapper">
-                            <h1 className="text-2xl text-[#b1a696] font-bold leading-auto">Enjoy the view
-                                <br />
-                                through—the wide
-                                <br />
-                                panoramic glass
-                                <br />
-                                window
-                            </h1>
+                            <h3 className="text-2xl md:text-4xl text-[#b1a696] font-bold leading-[1.05]">{PHASES[0].lines.map((l, i) => <span key={i} className="block">{l}</span>)}</h3>
                             <div className="col-content-para flex items-center gap-4 justify-between">
-                                <div className="flex items-center gap-0 justify-center">
-                                    <h3 className="border-1 px-3 py-1 rounded-full text-[#aaa091]">1</h3>
-                                    <h3 className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</h3>
+                                <div className="flex items-center gap-0 justify-center" aria-hidden="true">
+                                    <h4 className="border-1 px-3 py-1 rounded-full text-[#aaa091]">1</h4>
+                                    <h4 className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</h4>
                                 </div>
-                                <p className={`text-[12px] font-medium  ${!reveal ? "mr-6" : "mr-0"}`}> Get closer to the desert nature than ever before
-                                    <br />
-                                    and admire this unique, breathtaking landscape.
-                                </p>
+                                <p className={`text-[12px] font-medium max-w-[22rem] text-right ${!reveal ? "mr-6" : "mr-0"}`}>{PHASES[0].text}</p>
                             </div>
 
                         </div>
                     </div>
-                </div>
-                <div className="col col-2">
+                </Link>
+                <div className="col col-2" aria-hidden="true">
                     <div className="col-img col-img-1">
                         <div className="col-img-wrapper">
-                            <img src={colimg1} alt="img" />
+                            <img src={colimg1} alt="" loading="lazy" />
                         </div>
                     </div>
                     <div className="col col-img-2 p-2">
                         <div className="col-img-wrapper">
-                            <img src={colimg2} alt="img" />
+                            <img src={colimg2} alt="" loading="lazy" />
                         </div>
                     </div>
                 </div>
-                <div className="col col-3">
+                <Link to={phase2.to} className="col col-3 block" aria-label={`${phase2.title}: ${phase2.count} kaynak`}>
                     <div className="col-content-wrapper">
-                        <h1 className="text-2xl font-bold leading-auto">Enjoy the view
-                            <br />
-                            through—the wide
-                            <br />
-                            panoramic glass
-                            <br />
-                            window
-                        </h1>
+                        <h3 className="text-2xl md:text-4xl font-bold leading-[1.05]">{PHASES[1].lines.join(" ")}</h3>
                         <div className={`col-content-para flex items-center gap-4 justify-between ${reveal ? "ml-0" : "ml-6"}`}>
-                            <div className="flex items-center gap-0 justify-center">
-                                <h3 className="border-1 px-3 py-1 rounded-full text-[#aaa091]">{(reveal) ? "3" : "2"}</h3>
-                                <h3 className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</h3>
+                            <div className="flex items-center gap-0 justify-center" aria-hidden="true">
+                                <h4 className="border-1 px-3 py-1 rounded-full text-[#aaa091]">{(reveal) ? "3" : "2"}</h4>
+                                <h4 className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</h4>
                             </div>
-                            <p className="text-[12px] font-medium"> Get closer to the desert nature than ever before
-                                <br />
-                                and admire this unique, breathtaking landscape.
-                            </p>
+                            <p className="text-[12px] font-medium max-w-[22rem] text-right">{PHASES[1].text}</p>
                         </div>
                     </div>
                     <div className="col-content-wrapper-2">
-                        <h1 className="text-2xl font-bold leading-auto">Enjoy the view
-                            <br />
-                            through—the wide
-                            <br />
-                            panoramic glass
-                            <br />
-                            window
-                        </h1>
+                        <h3 className="text-2xl md:text-4xl font-bold leading-[1.05]">{PHASES[2].lines.join(" ")}</h3>
                         <div className="col-content-para flex items-center gap-4 justify-between">
                             <div className="flex items-center gap-0 justify-center">
                                 {/* <h3 className="border-1 px-3 py-1 rounded-full text-[#aaa091]">3</h3>
                                 <h3 className="border-1 px-3 py-1 rounded-full text-[#524e4b]">3</h3> */}
                             </div>
-                            <p className={`text-[12px] font-medium  ${!reveal ? "mr-0" : "mr-6"}`}> Get closer to the desert nature than ever before
-                                <br />
-                                and admire this unique, breathtaking landscape.
-                            </p>
+                            <p className={`text-[12px] font-medium max-w-[22rem] text-right ${!reveal ? "mr-0" : "mr-6"}`}>{PHASES[2].text}</p>
                         </div>
                     </div>
-                </div>
-                <div className="col col-4">
+                </Link>
+                <div className="col col-4" aria-hidden="true">
                     <div className="col-img col-img-1">
                         <div className="col-img-wrapper">
-                            <img src={colimg1} alt="img" />
+                            <img src={colimg3} alt="" loading="lazy" />
                         </div>
                     </div>
                 </div>

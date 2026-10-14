@@ -1,4 +1,9 @@
 export const activitiesLinesLG = [
-    "Discover the",
-    "desert activities"
+    "Deneme erişimine",
+    "açık kaynaklar"
+]
+export const activitiesLinesSM = [
+    "Deneme",
+    "erişimine açık",
+    "kaynaklar"
 ]

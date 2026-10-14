@@ -8,6 +8,11 @@ import "./preloaderII.css";
 gsap.registerPlugin(SplitText);
 export default function PreloaderII() {
     useGSAP(() => {
+        // Visitors who ask for reduced motion skip the intro sequence.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            gsap.set(".preloader-progress, .preloader-mask, .preloader-content", { autoAlpha: 0, display: "none" });
+            return;
+        }
         function createSplitTexts(elements) {
             const splits = {};
             elements.forEach(({ key, selector, type }) => {
@@ -20,7 +25,7 @@ export default function PreloaderII() {
         }
 
         const splitElements = [
-            { key: "logoChars", selector: ".preloader-logo h1", type: "chars" },
+            { key: "logoChars", selector: ".preloader-logo .preloader-title", type: "chars" },
             { key: "footerLines", selector: ".preloader-footer p", type: "lines" },
         ];
 
@@ -122,11 +127,11 @@ export default function PreloaderII() {
     }, []);
 
     return (
-        <div className="size-full fixed z-51 overflow-hidden pointer-events-none">
+        <div className="size-full fixed z-51 overflow-hidden pointer-events-none" aria-hidden="true">
             <div className="preloader-progress">
                 <div className="preloader-progress-bar"></div>
                 <div className="preloader-logo">
-                    <h1>Capsule</h1>
+                    <p className="preloader-title">Kütüphane</p>
                 </div>
             </div>
 
@@ -135,8 +140,8 @@ export default function PreloaderII() {
             <div className="preloader-content">
                 <div className="preloader-footer">
                     <p className="text-sm">
-                        Meet Capsules®—modern and cozy<br />
-                        houses, in the California desert.
+                        Bilgiye Açılan Kapı—Kapadokya<br />
+                        Üniversitesi Kütüphanesi.
                     </p>
                 </div>
             </div>

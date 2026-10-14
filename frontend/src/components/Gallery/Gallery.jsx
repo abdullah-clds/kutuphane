@@ -4,10 +4,26 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './gallery.css';
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
-import gbg1 from '../../assets/background1.png';
-import gbg2 from '../../assets/background2.png';
-import gbg3 from '../../assets/background3.png';
-import gbg4 from '../../assets/background4.png';
+import { Link } from 'react-router-dom';
+import { libraries, media } from '../../lib/content';
+
+// The three libraries, in the order of the "Kütüphanelerimiz" page. Photos are the
+// featured images of their posts (supplied as content/gorseller/*.jpg).
+const PHOTOS = {
+    "merkez-kutuphane": ["media/site/merkez-kutuphane.jpg", "Merkez Kütüphane: taş tonozlu salonda kitap rafları"],
+    "sosyal-bilimler-kutuphanesi": ["media/site/sosyal-bilimler-kutuphanesi.jpg", "Sosyal Bilimler Kütüphanesi: kitap rafları"],
+    "fen-bilimleri-kutuphanesi": ["media/site/fen-bilimleri-kutuphanesi.jpg", "Fen Bilimleri Kütüphanesi: iki katlı okuma salonu"],
+};
+const LIBRARIES = libraries.items.slice(0, 3).map((l) => ({
+    name: l.name,
+    slug: l.slug,
+    campus: /Ürgüp/.test(l.paragraphs[0]) ? "Ürgüp" : "Mustafapaşa",
+    text: l.paragraphs.at(-1),
+    hours: l.hours?.replace(/^.*?–\s*/, "") ?? "",
+    image: media(PHOTOS[l.slug][0]),
+    alt: PHOTOS[l.slug][1],
+}));
+const PROGRESS = ["w-[33%]", "w-[67%]", "w-[100%]"];
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -90,19 +106,21 @@ const Gallery = () => {
             })
             .to({}, { duration: 0.4 }, "+=0");
 
-        // Clean up function
+        // Clean up function: only this section's timeline. Killing every ScrollTrigger here
+        // (original code) also removed other sections' triggers on route changes.
         return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            tl4.scrollTrigger?.kill();
+            tl4.kill();
         };
     }, []);
 
-    // Generate repeating Capsules® elements
+    // Generate repeating marquee words
     const generateCapsules = (quantity = 6) => {
         const capsules = [];
         for (let i = 1; i <= quantity; i++) {
             capsules.push(
                 <h3 key={i} style={{ "--index": i }} className='tracking-tighter'>
-                    Capsules®
+                    Kütüphane
                 </h3>
             );
         }
@@ -110,8 +128,8 @@ const Gallery = () => {
     };
 
     return (
-        <section className="gallery-page4" ref={pageRef}>
-            <div className="gallery-slider">
+        <section className="gallery-page4" ref={pageRef} id="kutuphanelerimiz" aria-label="Kütüphanelerimiz">
+            <div className="gallery-slider" aria-hidden="true">
                 <div
                     className="gallery-box"
                     style={{ "--time": "40s", "--quantity": 6 }}
@@ -120,56 +138,30 @@ const Gallery = () => {
                 </div>
             </div>
 
-            <div className="gallery-background">
-                <img src={gbg1} alt="Classic Capsule" />
-                <div className="gallery-topText">
-                    <h4>ClassicCapsule®</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
+            {LIBRARIES.map((lib, i) => (
+                <div
+                    key={lib.name}
+                    id={i === 0 ? undefined : i === 1 ? "gallery-second" : "gallery-third"}
+                    className={i === 0 ? "gallery-background" : "gallery-background2"}
+                >
+                    <img src={lib.image} alt={lib.alt} />
+                    <div className="gallery-topText">
+                        <h4>{lib.name}</h4>
+                        <h3>({lib.campus})</h3>
                     </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[33%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="gallery-second" className="gallery-background2">
-                <img src={gbg2} alt="Terrace Capsule" />
-                <div className="gallery-topText">
-                    <h4>Terrace Capsule®</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
-                    </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[67%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
+                    <div className="gallery-bottomText">
+                        <div className='w-full flex justify-center items-center gap-0'>
+                            <Link to={`/kutuphanelerimiz#${lib.slug}`} aria-label={`${lib.name}: ayrıntılar`} className="shrink-0 transition-transform duration-500 hover:rotate-90">
+                                <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
+                            </Link>
+                            <h3>{lib.text}<br />{lib.hours}</h3>
+                        </div>
+                        <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48] shrink-0">
+                            <div className={`progress-line absolute z-10 bg-[#f4efe7] ${PROGRESS[i]} h-[0.1rem] top-1/2 -translate-y-1/2 left-0`}></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="gallery-third" className="gallery-background2">
-                <img src={gbg3} alt="Desert Capsule" />
-                <div className="gallery-topText">
-                    <h4>Desert Capsule®</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
-                    </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[100%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
-                    </div>
-                </div>
-            </div>
+            ))}
         </section>
     );
 };

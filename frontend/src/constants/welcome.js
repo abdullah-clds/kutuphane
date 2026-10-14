@@ -1,33 +1,31 @@
+// Source: "Kütüphanelerimiz" page, first paragraph (wording unchanged, only broken into lines).
 export const welcomeLinesLG = [
-    "Welcome to a world of wild California",
-    "desert with Capsules®, where you will",
-    "discover exquisite nature observing it",
-    "from capsule houses, nestled in the",
-    "one of the most breathtaking",
-    "destination on the United States.",
+    "Üniversitemiz bünyesinde; Merkez",
+    "Kütüphanesi, Sosyal Bilimler Kütüphanesi",
+    "ve Fen Bilimleri Kütüphanesi olmak",
+    "üzere üç farklı mekanda yapılandırılmış",
+    "kütüphane bulunmaktadır.",
 ];
 export const welcomeLinesSM = [
-    "Welcome to a world",
-    "of wild California",
-    "desert with ",
-    "Capsules®, where ",
-    "you will discover ",
-    "exquisite nature",
-    "observing it from",
-    "capsule houses,",
-    "nestled in the one",
-    "of the most",
-    "breathtaking",
-    "destination on the",
-    "United States.",
+    "Üniversitemiz",
+    "bünyesinde; Merkez",
+    "Kütüphanesi, Sosyal",
+    "Bilimler Kütüphanesi",
+    "ve Fen Bilimleri",
+    "Kütüphanesi olmak",
+    "üzere üç farklı",
+    "mekanda",
+    "yapılandırılmış",
+    "kütüphane",
+    "bulunmaktadır.",
 ];
 
-export const chooseLinesLG =[
-    "Choose the one",
-    "you like best"
+// Source: the previous homepage ("Tüm Kaynaklarda Tarama" card): "...ihtiyacınız olan bilgiye hızla ulaşın."
+export const chooseLinesLG = [
+    "Bilgiye hızla",
+    "ulaşın"
 ];
-export const chooseLinesSM =[
-    "Choose the",
-    "one you like",
-    "best"
+export const chooseLinesSM = [
+    "Bilgiye",
+    "hızla ulaşın"
 ];

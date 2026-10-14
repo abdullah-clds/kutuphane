@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import "./overlay.css";
 import { MdArrowOutward } from "react-icons/md";
 
-const ClickIndicator = ({ active }) => {
+const ClickIndicator = ({ active, label = "Haritayı göster" }) => {
     const ref = useRef(null);
 
     useEffect(() => {
@@ -25,9 +25,9 @@ const ClickIndicator = ({ active }) => {
     if (!active) return null;
 
     return createPortal(
-        <div ref={ref} className="click-indicator visible text-[0.7rem] px-3 py-2 rounded-4xl">
+        <div ref={ref} aria-hidden="true" className="click-indicator visible text-[0.7rem] px-3 py-2 rounded-4xl">
             <div className="w-auto bg-[#f4efe7] flex justify-center items-center gap-3">
-                <p>Show the map</p>
+                <p>{label}</p>
                 <MdArrowOutward className="bg-[#2a2725] text-[#b3a694] w-[3rem] h-[3rem] rounded-full p-1" />
             </div>
         </div>,

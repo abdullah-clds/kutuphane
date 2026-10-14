@@ -1,0 +1,47 @@
+{
+ "introHtml": "<p>Üniversitemiz bünyesinde; Merkez Kütüphanesi, Sosyal Bilimler Kütüphanesi ve Fen Bilimleri Kütüphanesi olmak üzere üç farklı mekanda yapılandırılmış kütüphane bulunmaktadır. Kütüphanelerdeki koleksiyonlar, yerleşkelerde faaliyet gösteren eğitim-öğretim programlarına göre oluşturulmuştur. Kapadokya Üniversitesi kütüphanelerindeki tüm yayınlar Yordam kütüphane otomasyon programına aktarılmaktadır.</p>\n<p>Araştırma yapan öğrencilerimiz ve öğretim elemanlarımız, Üniversitemizin internet sitesinde yer alan <a href=\"/\">Kütüphane</a> sayfamızdan, kütüphane kataloğumuza erişebilmekte, üniversitemizin veri tabanlarından 7 gün 24 saat yararlanabilmektedirler.</p>\n<p>Kapadokya Üniversitesi, kütüphanesini sürekli zenginleştirmekte, koleksiyonunda yer alan süreli yayınları ve referans kaynaklarını zenginleştirmektedir. Elektronik kaynaklara kolay erişimi sağlayacak bilgisayarlar araştırmacıların hizmetine sunulmuştur.</p>\n<p>Bunların dışında, Kapadokya Çalışmaları Uygulama ve Araştırma Merkezi bünyesinde Sanat Tarihi; Uygulamalı Bilimler Yüksekokulu bünyesinde ise Uçak Teknolojisi özel kitaplıkları bulunmaktadır.</p>",
+ "intro": [
+  "Üniversitemiz bünyesinde; Merkez Kütüphanesi, Sosyal Bilimler Kütüphanesi ve Fen Bilimleri Kütüphanesi olmak üzere üç farklı mekanda yapılandırılmış kütüphane bulunmaktadır. Kütüphanelerdeki koleksiyonlar, yerleşkelerde faaliyet gösteren eğitim-öğretim programlarına göre oluşturulmuştur. Kapadokya Üniversitesi kütüphanelerindeki tüm yayınlar Yordam kütüphane otomasyon programına aktarılmaktadır.",
+  "Araştırma yapan öğrencilerimiz ve öğretim elemanlarımız, Üniversitemizin internet sitesinde yer alan Kütüphane sayfamızdan, kütüphane kataloğumuza erişebilmekte, üniversitemizin veri tabanlarından 7 gün 24 saat yararlanabilmektedirler.",
+  "Kapadokya Üniversitesi, kütüphanesini sürekli zenginleştirmekte, koleksiyonunda yer alan süreli yayınları ve referans kaynaklarını zenginleştirmektedir. Elektronik kaynaklara kolay erişimi sağlayacak bilgisayarlar araştırmacıların hizmetine sunulmuştur.",
+  "Bunların dışında, Kapadokya Çalışmaları Uygulama ve Araştırma Merkezi bünyesinde Sanat Tarihi; Uygulamalı Bilimler Yüksekokulu bünyesinde ise Uçak Teknolojisi özel kitaplıkları bulunmaktadır."
+ ],
+ "items": [
+  {
+   "name": "Merkez Kütüphane",
+   "slug": "merkez-kutuphane",
+   "paragraphs": [
+    "Merkez kütüphane, Mustafapaşa Yerleşkemizde bulunmaktadır.",
+    "Kütüphanemiz, açık raf sistemi ile aynı anda 40 kişilik oturma kapasitesine sahiptir.",
+    "Kütüphanenin koleksiyonu ağırlıklı olarak felsefe, tarih, genel hukuk, havacılık, teknoloji ve mimarlık konularında yayınlardan oluşmaktadır."
+   ],
+   "hours": "Mustafapaşa Merkez Kütüphanesi – Pazar hariç, her gün saat 09:00 – 18:00",
+   "sourceImage": "https://kutuphane.kapadokya.edu.tr/wp-content/uploads/2024/05/Kutuphane_.jpg"
+  },
+  {
+   "name": "Sosyal Bilimler Kütüphanesi",
+   "slug": "sosyal-bilimler-kutuphanesi",
+   "paragraphs": [
+    "Sosyal Bilimler Kütüphanesi, Mustafapaşa Yerleşkemizde bulunmaktadır.",
+    "Kütüphanemiz, açık raf sistemi ile aynı anda 40 kişilik oturma kapasitesine sahiptir.",
+    "Kütüphanenin koleksiyonu ağırlıklı olarak sosyal bilimler, politik bilimler, tarih, hukuk, edebiyat konularında yayınlardan oluşmaktadır."
+   ],
+   "hours": "Mustafapaşa Sosyal Bilimler Kütüphanesi – Her gün saat 09:00 – 23:59 (Pazar günü saat 10:00 – 23:59)",
+   "sourceImage": "https://kutuphane.kapadokya.edu.tr/wp-content/uploads/2024/08/kutuphane.jpg"
+  },
+  {
+   "name": "Fen Bilimleri Kütüphanesi",
+   "slug": "fen-bilimleri-kutuphanesi",
+   "paragraphs": [
+    "Fen Bilimleri Kütüphanesi, Ürgüp Yerleşkesinde yer almaktadır.",
+    "Kütüphanemiz, açık raf sistemi ile aynı anda 40 kişilik oturma kapasitesine sahiptir.",
+    "Kütüphanemizde ağırlıklı olarak Fen bilimleri, tıp, sanat, sanat tarihi, eğitim, çocuk gelişimi, beslenme, mutfak sanatları konularında yayınlar bulunmaktadır."
+   ],
+   "hours": "Ürgüp Fen Bilimleri Kütüphanesi – Her gün saat 09:00 – 23:59",
+   "sourceImage": "https://kutuphane.kapadokya.edu.tr/wp-content/uploads/2024/08/fenbilimleri.jpg"
+  }
+ ],
+ "otherHours": [
+  "Ürgüp Fabrika Yerleşke Kitaplığı- Pazar hariç, her gün saat 09:00 – 18:00"
+ ]
+}

@@ -1,0 +1,30 @@
+[
+ {
+  "slug": "toplu-katalog",
+  "title": "Toplu Katalog",
+  "image": "media/2024/05/toplu-katalog.jpg",
+  "html": "<p>Kütüphanemizin tüm koleksiyonlarını tek bir arayüzde bir araya getiriyoruz. Aradığınız kaynakları hızlı ve kolay bir şekilde bulun.</p>",
+  "text": "Kütüphanemizin tüm koleksiyonlarını tek bir arayüzde bir araya getiriyoruz. Aradığınız kaynakları hızlı ve kolay bir şekilde bulun."
+ },
+ {
+  "slug": "ankos",
+  "title": "ANKOS",
+  "image": "media/2024/05/ankos.jpg",
+  "html": "<p>ANKOS, 2000 yılında 12 üye kurumun üç veri tabanı aboneliği ile kurulmuştur. Türkiye’nin her bölgesinde kurulmuş olan üniversitelerin öğretim elemanları ile bazı araştırma kurumlarında çalışanlar, ANKOS sayesinde, aralarında fen, matematik, sosyal bilimler, beşeri bilimler, tıp, tarım, işletme, eğitim, enformatik, bilgisayar ve mühendislik konularında bibliyografik ve tam metin veri tabanlarına erişmektedirler.</p>\n<p>ANKOS’un internet sayfasına ulaşmak için <a href=\"https://ankos.org.tr/\" target=\"_blank\" rel=\"noopener noreferrer\">tıklayınız.</a></p>\n<p>Üniversitemizin TÜBESS ile iş birliği kapsamında, ANKOS’tan yayın talebinde bulunabilirsiniz. Yayın talepleriniz için <a href=\"http://kalite.kapadokya.edu.tr/DOKUMAN/KD.FR.013.YAYIN-TALEP-FORMU.Docx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"doc-link\">Yayın Talep Formu</a> ile <a href=\"mailto:kutuphane@kapadokya.edu.tr\">kutuphane@kapadokya.edu.tr </a>adresine mail atmanız gerekmektedir.</p>",
+  "text": "ANKOS, 2000 yılında 12 üye kurumun üç veri tabanı aboneliği ile kurulmuştur. Türkiye’nin her bölgesinde kurulmuş olan üniversitelerin öğretim elemanları ile bazı araştırma kurumlarında çalışanlar, ANKOS sayesinde, aralarında fen, matematik, sosyal bilimler, beşeri bilimler, tıp, tarım, işletme, eğitim, enformatik, bilgisayar ve mühendislik konularında bibliyografik ve tam metin veri tabanlarına erişmektedirler. ANKOS’un internet sayfasına ulaşmak için tıklayınız. Üniversitemizin TÜBESS ile iş birliği kapsamında, ANKOS’tan yayın talebinde bulunabilirsiniz. Yayın talepleriniz için Yayın Talep Formu ile kutuphane@kapadokya.edu.tr adresine mail atmanız gerekmektedir."
+ },
+ {
+  "slug": "kasif",
+  "title": "KAŞİF",
+  "image": "media/2024/05/kasif-1-300x300-1.jpg",
+  "html": "<p>Milli Kütüphane&#39;nin yeni KAŞİF Otomasyon Sistemi ile kitap, süreli yayın, yazma ve nadir eserler dahil çeşitli materyallerde arama yapabilirsiniz.</p>",
+  "text": "Milli Kütüphane'nin yeni KAŞİF Otomasyon Sistemi ile kitap, süreli yayın, yazma ve nadir eserler dahil çeşitli materyallerde arama yapabilirsiniz."
+ },
+ {
+  "slug": "kutuphaneler-arasi-odunc-verme-sistemi",
+  "title": "Kütüphaneler Arası Ödünç Verme Sistemi",
+  "image": "media/2024/05/odunc-verme.jpg",
+  "html": "<p>Kütüphaneler Arası Ödünç Verme Sistemi ile diğer kütüphanelerden ihtiyaç duyduğunuz materyalleri kolayca ödünç alabilirsiniz.</p>",
+  "text": "Kütüphaneler Arası Ödünç Verme Sistemi ile diğer kütüphanelerden ihtiyaç duyduğunuz materyalleri kolayca ödünç alabilirsiniz."
+ }
+]

@@ -20,7 +20,8 @@
     transform: translateX(-100%);
 }
 
-.marquee-text-marquee h1 {
+.marquee-text-marquee h1,
+.marquee-text-marquee .marquee-word {
     font-size: 11vw;
     color: #f4efe7;
     font-weight: 500;
