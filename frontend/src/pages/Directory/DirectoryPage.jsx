@@ -58,7 +58,7 @@ const DirectoryPage = ({ type }) => {
     useReveal(scope, [type]);
 
     const pill = (active) =>
-        `border-[1px] rounded-full px-4 py-1 text-sm transition-colors duration-300 ${active ? "bg-[#f4efe7] border-[#f4efe7] text-[#2a2725]" : "border-[#4f4b48] text-[#b1a696] hover:text-[#f4efe7] hover:border-[#b1a696]"}`;
+        `border-[1px] rounded-full px-4 py-1 text-sm transition-colors duration-300 ${active ? "bg-[#1d1d1f] border-[#1d1d1f] text-white" : "border-transparent bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]"}`;
 
     return (
         <div ref={scope}>
@@ -72,7 +72,7 @@ const DirectoryPage = ({ type }) => {
                 aside={<>{base.length} kaynak{page?.updated ? <><br />Son güncelleme {formatDate(page.updated)}</> : null}</>}
             />
 
-            <section className="px-6 md:px-8 pb-28" aria-label={`${title} listesi`}>
+            <section className="kun-wrap pb-28" aria-label={`${title} listesi`}>
                 {/* Collection switcher: links on single pages, a filter on the combined page */}
                 <nav aria-label="Kaynak türleri" className="flex flex-wrap gap-2" data-reveal>
                     {type === "all" ? (
@@ -94,10 +94,10 @@ const DirectoryPage = ({ type }) => {
                     )}
                 </nav>
 
-                <div className="mt-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between border-b border-[#4f4b48] pb-8" data-reveal>
-                    <label className="flex items-center gap-2 bg-[#f4efe7] rounded-full pl-5 pr-2 py-1 lg:w-[30rem]">
+                <div className="mt-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between border-b border-[#d2d2d7] pb-8" data-reveal>
+                    <label className="flex items-center gap-2 kun-field lg:w-[30rem]">
                         <span className="sr-only">Kaynak adı veya açıklamasında ara</span>
-                        <input type="search" value={query} onChange={(e) => { setQuery(e.target.value); setLetter(null); }} placeholder="Kaynak adı veya konu arayın..." className="flex-1 min-w-0 bg-transparent py-2.5 text-[#2a2725] placeholder:text-[#8a7f70] outline-none" />
+                        <input type="search" value={query} onChange={(e) => { setQuery(e.target.value); setLetter(null); }} placeholder="Kaynak adı veya konu arayın..." className="flex-1 min-w-0 bg-transparent py-2.5 text-[#1d1d1f] placeholder:text-[#86868b] outline-none" />
                     </label>
                     <div className="flex flex-wrap gap-2" role="group" aria-label="Sıralama">
                         <button type="button" aria-pressed={sort === "az"} onClick={() => setSort("az")} className={pill(sort === "az")}>A–Z</button>
@@ -106,29 +106,29 @@ const DirectoryPage = ({ type }) => {
                 </div>
 
                 <div className="flex flex-wrap gap-1 mt-6" role="group" aria-label="Baş harfe göre süz" data-reveal>
-                    <button type="button" aria-pressed={!letter} onClick={() => setLetter(null)} className={`w-auto px-3 h-9 rounded-full text-sm ${!letter ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:text-[#f4efe7]"}`}>Tümü</button>
+                    <button type="button" aria-pressed={!letter} onClick={() => setLetter(null)} className={`w-auto px-3 h-9 rounded-full text-sm ${!letter ? "bg-[#1d1d1f] text-white" : "text-[#424245] hover:text-[#1d1d1f]"}`}>Tümü</button>
                     {letters.map((l) => (
-                        <button key={l} type="button" aria-pressed={letter === l} onClick={() => setLetter(letter === l ? null : l)} className={`w-9 h-9 rounded-full text-sm ${letter === l ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:text-[#f4efe7] hover:bg-[#2a2725]"}`}>{l}</button>
+                        <button key={l} type="button" aria-pressed={letter === l} onClick={() => setLetter(letter === l ? null : l)} className={`w-9 h-9 rounded-full text-sm ${letter === l ? "bg-[#1d1d1f] text-white" : "text-[#424245] hover:text-[#1d1d1f] hover:bg-[#f5f5f7]"}`}>{l}</button>
                     ))}
                 </div>
 
                 {(effectiveType === "abone" || effectiveType === "all") && (
-                    <p className="mt-6 text-[0.85rem] text-[#b1a696]">
-                        Yerleşke dışından erişim için <Link to="/yerleske-disi-erisim" className="text-[#f4efe7] underline underline-offset-4 decoration-[#4f4b48]">Yerleşke Dışı Erişim</Link> kılavuzlarına bakın.
+                    <p className="mt-6 text-[0.85rem] text-[#424245]">
+                        Yerleşke dışından erişim için <Link to="/yerleske-disi-erisim" className="text-[#1d1d1f] underline underline-offset-4 decoration-[#d2d2d7]">Yerleşke Dışı Erişim</Link> kılavuzlarına bakın.
                     </p>
                 )}
 
-                <p className="text-[0.75rem] text-[#8a8073] mt-6" aria-live="polite">{list.length} kaynak listeleniyor</p>
+                <p className="text-[0.75rem] text-[#6e6e73] mt-6" aria-live="polite">{list.length} kaynak listeleniyor</p>
 
                 {groups.map(([heading, items]) => (
                     <div key={heading ?? "list"} className="mt-6">
-                        {heading && <h2 className="text-[.7rem] font-bold text-[#eae5dd] mt-12 mb-2">{heading} ({items.length})</h2>}
-                        <ul className="border-b border-[#4f4b48]">
+                        {heading && <h2 className="text-[0.8rem] font-semibold text-[#6e6e73] mt-12 mb-2">{heading} ({items.length})</h2>}
+                        <ul className="border-b border-[#d2d2d7]">
                             {items.map((d) => <DatabaseRow key={d.id} d={d} showType={type === "all"} />)}
                         </ul>
                     </div>
                 ))}
-                {list.length === 0 && <p className="py-16 text-[#b1a696]">Aramanızla eşleşen kaynak bulunamadı.</p>}
+                {list.length === 0 && <p className="py-16 text-[#424245]">Aramanızla eşleşen kaynak bulunamadı.</p>}
             </section>
         </div>
     );

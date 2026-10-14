@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { MdArrowOutward } from "react-icons/md";
 import PageHero from "../../components/Page/PageHero";
 import useReveal from "../../components/Page/useReveal";
-import ClickIndicator from "../../components/MapLink/ClickIndicator";
 import { announcements, announcementStatus, formatDate, media, trialLabel } from "../../lib/content";
 
 const FILTERS = [
@@ -20,7 +19,6 @@ const AnnouncementsPage = () => {
     const [query, setQuery] = useState("");
     const [filter, setFilter] = useState("all");
     const [year, setYear] = useState("all");
-    const [hover, setHover] = useState(false);
 
     const years = useMemo(() => [...new Set(announcements.map((a) => a.date.slice(0, 4)))], []);
 
@@ -39,7 +37,7 @@ const AnnouncementsPage = () => {
     useReveal(scope, [list.length === announcements.length]);
 
     const pill = (active) =>
-        `border-[1px] rounded-full px-4 py-1 text-sm transition-colors duration-300 ${active ? "bg-[#f4efe7] border-[#f4efe7] text-[#2a2725]" : "border-[#4f4b48] text-[#b1a696] hover:text-[#f4efe7] hover:border-[#b1a696]"}`;
+        `border-[1px] rounded-full px-4 py-1 text-sm transition-colors duration-300 ${active ? "bg-[#1d1d1f] border-[#1d1d1f] text-white" : "border-transparent bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed]"}`;
 
     return (
         <div ref={scope}>
@@ -49,11 +47,12 @@ const AnnouncementsPage = () => {
                 crumbs={[{ label: "Duyurular" }]}
                 image="media/site/okuma-salonu-genis.jpg"
                 imageAlt="Okuma salonunda çalışan öğrenciler"
+                size="sm"
                 aside={<>{announcements.length} duyuru · son duyuru {formatDate(announcements[0].date)}</>}
             />
 
-            <section className="px-6 md:px-8 pb-28" aria-label="Duyuru listesi">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between border-b border-[#4f4b48] pb-8" data-reveal>
+            <section className="kun-wrap pb-28" aria-label="Duyuru listesi">
+                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between border-b border-[#d2d2d7] pb-8" data-reveal>
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-wrap gap-2" role="group" aria-label="Duyuru türü">
                             {FILTERS.map((f) => (
@@ -67,47 +66,44 @@ const AnnouncementsPage = () => {
                             ))}
                         </div>
                     </div>
-                    <label className="flex items-center gap-2 bg-[#f4efe7] rounded-full pl-5 pr-2 py-1 lg:w-[26rem]">
+                    <label className="flex items-center gap-2 kun-field lg:w-[26rem]">
                         <span className="sr-only">Duyurularda ara</span>
-                        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Duyurularda arayın..." className="flex-1 min-w-0 bg-transparent py-2.5 text-[#2a2725] placeholder:text-[#8a7f70] outline-none" />
+                        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Duyurularda arayın..." className="flex-1 min-w-0 bg-transparent py-2.5 text-[#1d1d1f] placeholder:text-[#86868b] outline-none" />
                     </label>
                 </div>
 
-                <p className="text-[0.75rem] text-[#8a8073] mt-5" aria-live="polite">{list.length} duyuru listeleniyor</p>
+                <p className="text-[0.75rem] text-[#6e6e73] mt-5" aria-live="polite">{list.length} duyuru listeleniyor</p>
 
-                <ClickIndicator active={hover} label="Duyuruyu oku" />
-                <ol className="mt-4" onMouseLeave={() => setHover(false)}>
+                <ol className="mt-4">
                     {list.map((a) => {
                         const status = announcementStatus(a);
                         return (
-                            <li key={a.slug} className="border-b border-[#4f4b48]">
+                            <li key={a.slug} className="border-b border-[#d2d2d7]">
                                 <Link
                                     to={`/duyurular/${a.slug}`}
-                                    onMouseEnter={() => setHover(true)}
-                                    onFocus={() => setHover(false)}
-                                    className="group grid gap-3 md:gap-6 py-7 md:grid-cols-12 md:items-center"
+                                    className="group grid gap-3 md:gap-6 py-5 md:grid-cols-12 md:items-center"
                                 >
-                                    <time dateTime={a.date} className="md:col-span-2 text-[0.75rem] text-[#8a8073]">{formatDate(a.date)}</time>
+                                    <time dateTime={a.date} className="md:col-span-2 text-[0.75rem] text-[#6e6e73]">{formatDate(a.date)}</time>
                                     <span className="md:col-span-7 flex items-center gap-5">
                                         {a.image && (
-                                            <img src={media(a.image)} alt="" loading="lazy" className="hidden md:block w-24 h-16 shrink-0 rounded-2xl object-cover bg-[#2a2725] opacity-80 group-hover:opacity-100 transition-opacity" />
+                                            <img src={media(a.image)} alt="" loading="lazy" className="hidden md:block w-20 h-14 shrink-0 rounded-xl object-contain bg-white border border-[#e8e8ed] p-1" />
                                         )}
-                                        <span className="text-xl md:text-[1.7rem] leading-[1.15] text-[#b1a696] group-hover:text-[#f4efe7] transition-colors [text-wrap:pretty]">{a.title}</span>
+                                        <span className="text-lg md:text-[1.3rem] font-semibold leading-[1.2] tracking-tight text-[#1d1d1f] group-hover:text-[#0a5cad] transition-colors [text-wrap:pretty]">{a.title}</span>
                                     </span>
                                     <span className="md:col-span-3 flex md:justify-end items-center gap-3">
                                         {status && (
-                                            <span className={`rounded-full border px-3 py-1 text-[0.7rem] ${status === "active" ? "bg-[#f4efe7] text-[#2a2725] border-[#f4efe7]" : "border-[#4f4b48] text-[#8a8073]"}`}>
+                                            <span className={`rounded-full border px-3 py-1 text-[0.7rem] ${status === "active" ? "bg-[#e8f1fb] text-[#0a5cad] border-transparent" : "border-[#d2d2d7] text-[#6e6e73]"}`}>
                                                 {trialLabel(status, a.trialEnd)}
                                             </span>
                                         )}
-                                        <MdArrowOutward aria-hidden="true" className="hidden md:block w-9 h-9 p-2 rounded-full border border-[#4f4b48] text-[#b1a696] group-hover:bg-[#f4efe7] group-hover:text-[#2a2725] group-hover:rotate-45 transition-all duration-500" />
+                                        <MdArrowOutward aria-hidden="true" className="hidden md:block w-9 h-9 p-2 rounded-full border border-[#d2d2d7] text-[#424245] group-hover:bg-[#1d1d1f] group-hover:text-white group-hover:rotate-45 transition-all duration-500" />
                                     </span>
                                 </Link>
                             </li>
                         );
                     })}
                 </ol>
-                {list.length === 0 && <p className="py-16 text-[#b1a696]">Aramanızla eşleşen duyuru bulunamadı.</p>}
+                {list.length === 0 && <p className="py-16 text-[#424245]">Aramanızla eşleşen duyuru bulunamadı.</p>}
             </section>
         </div>
     );

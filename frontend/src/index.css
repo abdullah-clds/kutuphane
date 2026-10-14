@@ -1,5 +1,5 @@
-/* DIN-like typeface with full Turkish (latin-ext) coverage; replaces the theme's Inter. */
-@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+/* Inter: the theme's own typeface and the closest open alternative to Apple's SF; full Turkish coverage. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,400&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -13,13 +13,22 @@
 	--kun-stone: #b1a696;
 	--kun-line: #4f4b48;
 	--kun-label: #eae5dd;
+	/* Light, Apple-like surfaces for everything below the intro */
+	--kun-text: #1d1d1f;
+	--kun-text-2: #6e6e73;
+	--kun-fill: #f5f5f7;
+	--kun-sep: #d2d2d7;
+	--kun-accent: #0a5cad;
+	--kun-navy: #002856;
 }
 
 html,
 body {
-	background-color: #181717;
+	background-color: #ffffff;
+	color: #1d1d1f;
 	scroll-behavior: smooth;
-	font-family: "Barlow", "DIN Pro", "Helvetica Neue", Arial, sans-serif;
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
 	scroll-behavior: smooth;
 	scrollbar-width: none;
 	/* Chrome, Edge, Safari */
@@ -349,12 +358,12 @@ body {
 /* ================= Kapadokya Üniversitesi Kütüphanesi: shared library styles ================= */
 
 ::selection {
-	background: var(--kun-cream);
-	color: var(--kun-ink);
+	background: #cfe1fb;
+	color: #1d1d1f;
 }
 
 :focus-visible {
-	outline: 2px solid var(--kun-cream);
+	outline: 2px solid var(--kun-accent);
 	outline-offset: 3px;
 	border-radius: 0.5rem;
 }
@@ -368,117 +377,82 @@ body {
 	white-space: nowrap;
 }
 
-/* Long-form institutional text. Calm, readable, in the theme's colours. */
+/* Long-form institutional text: light surface, 17px body like Apple's reading pages. */
 .kun-prose {
-	color: var(--kun-stone);
-	font-size: 1.125rem;
-	line-height: 1.7;
-	letter-spacing: 0.005em;
-	max-width: 46rem;
+	color: #1d1d1f;
+	font-size: 1.0625rem;
+	line-height: 1.65;
+	letter-spacing: -0.003em;
+	max-width: 44rem;
 	overflow-wrap: anywhere;
 }
 
-.kun-prose > * + * {
-	margin-top: 1.1em;
-}
+.kun-prose > * + * { margin-top: 1em; }
 
-.kun-prose h2,
-.kun-prose h3,
-.kun-prose h4,
-.kun-prose h5,
-.kun-prose h6 {
-	color: var(--kun-cream);
+.kun-prose h2, .kun-prose h3, .kun-prose h4, .kun-prose h5, .kun-prose h6 {
+	color: #1d1d1f;
 	font-weight: 600;
-	line-height: 1.15;
-	letter-spacing: -0.01em;
-	margin-top: 2.2em;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	margin-top: 2em;
 }
 
-.kun-prose h2 { font-size: 2.25rem; }
-.kun-prose h3 { font-size: 1.85rem; }
-.kun-prose h4 { font-size: 1.5rem; }
-.kun-prose h5,
-.kun-prose h6 { font-size: 1.3rem; }
-
+.kun-prose h2 { font-size: 1.9rem; }
+.kun-prose h3 { font-size: 1.55rem; }
+.kun-prose h4 { font-size: 1.3rem; }
+.kun-prose h5, .kun-prose h6 { font-size: 1.15rem; }
 .kun-prose > :first-child { margin-top: 0; }
-
-.kun-prose strong { color: var(--kun-cream); font-weight: 600; }
+.kun-prose strong { font-weight: 600; }
 
 .kun-prose a {
-	color: var(--kun-cream);
-	text-decoration: underline;
-	text-decoration-color: var(--kun-line);
-	text-underline-offset: 0.2em;
-	transition: text-decoration-color 0.3s ease;
+	color: var(--kun-accent);
+	text-decoration: none;
 }
 
-.kun-prose a:hover { text-decoration-color: var(--kun-cream); }
+.kun-prose a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
 
 .kun-prose a.doc-link::after {
 	content: "↗";
 	display: inline-block;
-	margin-left: 0.25em;
+	margin-left: 0.2em;
 	font-size: 0.8em;
-	text-decoration: none;
 }
 
-.kun-prose ul,
-.kun-prose ol { padding-left: 1.4em; }
-
-.kun-prose ul { list-style: none; }
-
-.kun-prose ul > li { position: relative; }
-
-.kun-prose ul > li::before {
-	content: "";
-	position: absolute;
-	left: -1.2em;
-	top: 0.72em;
-	width: 0.42em;
-	height: 0.42em;
-	border: 1px solid var(--kun-stone);
-	border-radius: 999px;
-}
-
+.kun-prose ul, .kun-prose ol { padding-left: 1.3em; }
+.kun-prose ul { list-style: disc; }
+.kun-prose ul ::marker { color: #86868b; }
 .kun-prose ol { list-style: decimal; }
-.kun-prose li + li { margin-top: 0.45em; }
-.kun-prose li > ul { margin-top: 0.45em; }
+.kun-prose li + li { margin-top: 0.4em; }
+.kun-prose li > ul { margin-top: 0.4em; }
 
 .kun-prose img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 1.5rem;
-	background: var(--kun-cream);
+	border-radius: 18px;
+	background: #f5f5f7;
 }
 
 .kun-prose table {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 1rem;
+	font-size: 0.95rem;
 	display: block;
 	overflow-x: auto;
 }
 
-.kun-prose th,
-.kun-prose td {
+.kun-prose th, .kun-prose td {
 	text-align: left;
-	padding: 0.85rem 1rem 0.85rem 0;
-	border-bottom: 1px solid var(--kun-line);
+	padding: 0.75rem 1rem 0.75rem 0;
+	border-bottom: 1px solid #d2d2d7;
 	vertical-align: top;
 }
 
-.kun-prose th { color: var(--kun-cream); font-weight: 600; }
-.kun-prose td:first-child { color: var(--kun-cream); }
+.kun-prose th { font-weight: 600; }
+.kun-prose td:first-child { font-weight: 500; }
+.kun-prose blockquote { border-left: 2px solid #d2d2d7; padding-left: 1.25rem; color: #424245; }
+.kun-prose hr { border-color: #d2d2d7; }
 
-.kun-prose blockquote {
-	border-left: 1px solid var(--kun-line);
-	padding-left: 1.25rem;
-}
-
-.kun-prose hr { border-color: var(--kun-line); }
-
-/* Long list pages (e.g. donors) flow into columns on wide screens. */
-.kun-prose.kun-columns ul { columns: 2 22rem; column-gap: 3rem; }
+.kun-prose.kun-columns ul { columns: 2 20rem; column-gap: 3rem; }
 .kun-prose.kun-columns li { break-inside: avoid; }
 
 /* Line mask used by entrance animations (same idea as the preloader lines). */
@@ -529,3 +503,90 @@ body {
 	letter-spacing: -0.01em;
 	color: #002856;
 }
+
+/* ---------- Apple-style building blocks ---------- */
+.kun-wrap { max-width: 1120px; margin-inline: auto; padding-inline: 1.5rem; }
+@media (min-width: 768px) { .kun-wrap { padding-inline: 2.5rem; } }
+.kun-wrap-wide { max-width: 1440px; margin-inline: auto; padding-inline: 0.5rem; }
+
+.kun-headline {
+	font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+	line-height: 1.07;
+	font-weight: 600;
+	letter-spacing: -0.028em;
+	color: #1d1d1f;
+}
+
+.kun-title {
+	font-size: clamp(1.75rem, 3vw, 2.5rem);
+	line-height: 1.1;
+	font-weight: 600;
+	letter-spacing: -0.022em;
+	color: #1d1d1f;
+}
+
+.kun-lead { font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.45; color: #6e6e73; letter-spacing: -0.01em; }
+
+.kun-more {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.15em;
+	color: var(--kun-accent);
+	font-size: 1rem;
+	letter-spacing: -0.01em;
+}
+.kun-more::after { content: "›"; font-size: 1.25em; line-height: 1; transform: translateY(-0.03em); }
+.kun-more:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+
+.kun-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	border-radius: 980px;
+	padding: 0.62rem 1.25rem;
+	font-size: 0.95rem;
+	font-weight: 500;
+	background: var(--kun-accent);
+	color: #fff;
+	transition: background-color 0.2s ease;
+}
+.kun-btn:hover { background: #084c90; }
+.kun-btn-quiet { background: #e8e8ed; color: #1d1d1f; }
+.kun-btn-quiet:hover { background: #dcdce1; }
+
+.kun-tile {
+	background: var(--kun-fill);
+	border-radius: 22px;
+	transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.35s ease;
+}
+a.kun-tile:hover { transform: scale(1.012); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08); }
+
+.kun-chip {
+	border-radius: 980px;
+	padding: 0.4rem 0.95rem;
+	font-size: 0.875rem;
+	background: #f5f5f7;
+	color: #1d1d1f;
+	transition: background-color 0.2s ease;
+}
+.kun-chip:hover { background: #e8e8ed; }
+.kun-chip[aria-pressed="true"], .kun-chip[aria-selected="true"], .kun-chip[aria-current="page"] { background: #1d1d1f; color: #fff; }
+
+.kun-field {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	background: #f5f5f7;
+	border: 1px solid transparent;
+	border-radius: 14px;
+	padding: 0 1rem;
+	transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.kun-field:focus-within { background: #fff; border-color: var(--kun-accent); box-shadow: 0 0 0 4px rgba(10, 92, 173, 0.15); }
+.kun-field input { flex: 1; min-width: 0; background: transparent; outline: none; padding: 0.85rem 0; color: #1d1d1f; }
+.kun-field input::placeholder { color: #86868b; }
+
+.kun-scroller { scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.kun-scroller::-webkit-scrollbar { display: none; }
+.kun-scroller > * { scroll-snap-align: start; }

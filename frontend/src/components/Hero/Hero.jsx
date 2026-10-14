@@ -80,9 +80,9 @@ const Hero = () => {
             ref={sectionRef}
             aria-roledescription="carousel"
             aria-label="Kütüphanelerimizden görüntüler"
-            className="hero-section w-dvw md:h-dvh h-[100vh] md:p-2 p-2.5"
+            className="hero-section w-dvw md:h-dvh h-[100vh] md:p-2 p-2.5 pt-[3.5rem] md:pt-[4rem]"
         >
-            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
+            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-[#181717]">
                 <div className="responsive-mobile">
                     {/* Background images (down layer) */}
                     <div className="hero-img absolute inset-0 z-0 md:block hidden">
@@ -128,16 +128,16 @@ const Hero = () => {
                     ></video>
                 </div>
                 <div className="p-4 flex flex-col md:justify-center">
-                    <div className="relative h-dvh">
+                    <div className="relative h-[calc(100dvh-6.5rem)] md:h-[calc(100dvh-6.5rem)]">
                         {/* Logo sits top-left (outside the card), so the title starts below it */}
                         <h1
-                            className="text-[#f4efe7] text-start text-6xl md:text-9xl font-bold tracking-wider lg:absolute lg:left-2 pt-16 md:pt-20 relative z-20"
+                            className="text-[#f4efe7] text-start text-6xl md:text-9xl font-bold tracking-wider lg:absolute lg:left-2 pt-2 md:pt-4 relative z-20"
                             style={{ textShadow: '2px 2px 4px #aaa' }}
                         >
                             <span className="sr-only">Kapadokya Üniversitesi </span>Kütüphane
                         </h1>
 
-                        <div className="w-full h-auto absolute z-20 top-36 md:top-24 md:bottom-[8%] lg:bottom-[9%] flex md:flex-row flex-col md:justify-between md:items-end">
+                        <div className="w-full h-auto absolute z-20 top-24 md:top-24 md:bottom-[8%] lg:bottom-[9%] flex md:flex-row flex-col md:justify-between md:items-end">
                             <h2
                                 className="text-start lg:mt-0 md:text-[#f4efe7] text-[#b1a696] text-2xl font-bold md:tracking-wider leading-5 flex flex-col gap-1"
                                 style={{ textShadow: '2px 2px 4px #000' }}

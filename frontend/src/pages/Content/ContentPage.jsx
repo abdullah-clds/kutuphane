@@ -39,9 +39,8 @@ const ContentPage = ({ route }) => {
                 image={image}
                 imageAlt={alt}
                 size="sm"
-                aside={<>Kapadokya Üniversitesi<br />Kütüphane ve Dokümantasyon Daire Başkanlığı</>}
             />
-            <div className="px-6 md:px-8 pb-28 grid gap-14 lg:grid-cols-12">
+            <div className="kun-wrap pb-28 grid gap-14 lg:grid-cols-12">
                 <div className="lg:col-span-3">
                     <PageAside updated={page.updated} sourceUrl={page.sourceUrl} />
                 </div>
