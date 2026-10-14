@@ -41,10 +41,11 @@ const AnnouncementsSection = () => {
             </div>
 
             <ol className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((a) => {
+                {items.map((a, i) => {
                     const status = announcementStatus(a);
                     return (
-                        <li key={a.slug} data-ann>
+                        // Phones show four; the archive link covers the rest.
+                        <li key={a.slug} data-ann className={i >= 4 ? "hidden sm:block" : undefined}>
                             <Link to={`/duyurular/${a.slug}`} className="group flex flex-col gap-3 h-full border-t border-[#4f4b48] hover:border-[#f4efe7] transition-colors duration-500 pt-4 pb-8">
                                 <span className="flex items-center justify-between gap-3 text-[0.72rem]">
                                     <time dateTime={a.date} className="text-[#8a8073]">{formatDate(a.date)}</time>

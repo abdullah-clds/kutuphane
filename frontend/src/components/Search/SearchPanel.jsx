@@ -26,7 +26,7 @@ const SearchPanel = ({ initial = "ebsco", tone = "dark" }) => {
                             role="radio"
                             aria-checked={active}
                             onClick={() => setScope(key)}
-                            className={`border-[1px] rounded-full px-[20px] py-[4px] lg:text-[1.5rem] text-[1rem] transition-colors duration-300 ${active
+                            className={`border-[1px] rounded-full px-[20px] py-[4px] lg:text-[1.1rem] text-[1rem] transition-colors duration-300 ${active
                                 ? (onDark ? "bg-[#f4efe7] border-[#f4efe7] text-[#2a2725]" : "bg-[#2a2725] border-[#2a2725] text-[#f4efe7]")
                                 : (onDark ? "border-[#b1a696] text-[#b1a696] hover:text-[#f4efe7] hover:border-[#f4efe7]" : "border-[#2a2725]/40 text-[#2a2725]")}`}
                         >
