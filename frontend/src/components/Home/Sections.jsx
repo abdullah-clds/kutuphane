@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Shared section frame: Apple-like rhythm, alternating white / light grey. */
 const Band = ({ tone = "white", id, label, children }) => (
-    <section id={id} aria-label={label} className={tone === "grey" ? "bg-[#f5f5f7]" : "bg-white"}>
+    <section id={id} aria-label={label} className={tone === "grey" ? "bg-[#181717]" : "bg-[#181717]"}>
         <div className="kun-wrap py-20 md:py-28" data-band>{children}</div>
     </section>
 );
@@ -57,7 +57,7 @@ export const TodayHours = () => {
         <Band tone="grey" id="bugun" label="Bugün açık kütüphaneler">
             <div className="flex flex-wrap items-end justify-between gap-4" data-rise>
                 <div>
-                    <p className="text-[0.95rem] text-[#6e6e73] capitalize">{dayFmt.format(now)}</p>
+                    <p className="text-[0.95rem] text-[#b1a696] capitalize">{dayFmt.format(now)}</p>
                     <h2 className="kun-title mt-1">Bugün kütüphanelerimiz</h2>
                 </div>
                 <Link to="/kutuphanelerimiz" className="kun-more">Kütüphanelerimiz</Link>
@@ -67,25 +67,25 @@ export const TodayHours = () => {
                     const st = statusNow(l.schedule, now);
                     const inner = (
                         <>
-                            <span className="text-[0.8rem] text-[#6e6e73]">{l.campus}</span>
-                            <span className="block mt-1 text-[1.15rem] font-semibold tracking-tight text-[#1d1d1f] leading-snug">{l.name}</span>
+                            <span className="text-[0.8rem] text-[#b1a696]">{l.campus}</span>
+                            <span className="block mt-1 text-[1.15rem] font-semibold tracking-tight text-[#f4efe7] leading-snug">{l.name}</span>
                             <span className="mt-auto pt-6 flex items-center gap-2 text-[0.9rem]">
-                                <span aria-hidden="true" className={`w-2 h-2 rounded-full ${st?.open ? "bg-[#1f9d55]" : "bg-[#b0b0b5]"}`} />
-                                <span className={st?.open ? "text-[#1d7a45] font-medium" : "text-[#6e6e73]"}>{st?.label ?? "Bilgi yok"}</span>
+                                <span aria-hidden="true" className={`w-2 h-2 rounded-full ${st?.open ? "bg-[#1f9d55]" : "bg-[#5e574f]"}`} />
+                                <span className={st?.open ? "text-[#9ad3a8] font-medium" : "text-[#b1a696]"}>{st?.label ?? "Bilgi yok"}</span>
                             </span>
-                            <span className="block mt-1 text-[0.8rem] text-[#6e6e73]">{st?.today ? `Bugün ${st.today[0]} – ${st.today[1]}` : "Bugün kapalı"}</span>
+                            <span className="block mt-1 text-[0.8rem] text-[#b1a696]">{st?.today ? `Bugün ${st.today[0]} – ${st.today[1]}` : "Bugün kapalı"}</span>
                         </>
                     );
                     return (
                         <li key={l.name} data-rise>
                             {l.slug
-                                ? <Link to={`/kutuphanelerimiz#${l.slug}`} className="kun-tile !bg-white flex flex-col h-full p-6">{inner}</Link>
-                                : <div className="kun-tile !bg-white flex flex-col h-full p-6">{inner}</div>}
+                                ? <Link to={`/kutuphanelerimiz#${l.slug}`} className="kun-tile flex flex-col h-full p-6">{inner}</Link>
+                                : <div className="kun-tile flex flex-col h-full p-6">{inner}</div>}
                         </li>
                     );
                 })}
             </ul>
-            <p className="mt-4 text-[0.75rem] text-[#86868b]" data-rise>Saatler “Genel Kurallar” sayfasındaki çalışma saatlerinden hesaplanır.</p>
+            <p className="mt-4 text-[0.75rem] text-[#8a8073]" data-rise>Saatler “Genel Kurallar” sayfasındaki çalışma saatlerinden hesaplanır.</p>
         </Band>
     );
 };
@@ -109,15 +109,15 @@ export const Explore = () => (
                 {/* "Kütüphanelerimiz" page, third paragraph */}
                 <p className="kun-lead mt-4">{libraries.intro[2]}</p>
             </div>
-            <ul className="lg:col-span-7 border-t border-[#d2d2d7]">
+            <ul className="lg:col-span-7 border-t border-[#4f4b48]">
                 {EXPLORE.map((e) => (
-                    <li key={e.to} data-rise className="border-b border-[#d2d2d7]">
+                    <li key={e.to} data-rise className="border-b border-[#4f4b48]">
                         <Link to={e.to} className="group flex items-center justify-between gap-6 py-5">
                             <span className="min-w-0">
-                                <span className="block text-[1.15rem] font-semibold tracking-tight text-[#1d1d1f] group-hover:text-[var(--kun-accent)]">{e.title}</span>
-                                <span className="block mt-1 text-[0.9rem] text-[#6e6e73] line-clamp-2">{e.sub}</span>
+                                <span className="block text-[1.15rem] font-semibold tracking-tight text-[#f4efe7] group-hover:text-[var(--kun-accent)]">{e.title}</span>
+                                <span className="block mt-1 text-[0.9rem] text-[#b1a696] line-clamp-2">{e.sub}</span>
                             </span>
-                            <MdChevronRight aria-hidden="true" className="shrink-0 w-6 h-6 text-[#86868b] group-hover:text-[var(--kun-accent)] group-hover:translate-x-0.5 transition-transform" />
+                            <MdChevronRight aria-hidden="true" className="shrink-0 w-6 h-6 text-[#8a8073] group-hover:text-[var(--kun-accent)] group-hover:translate-x-0.5 transition-transform" />
                         </Link>
                     </li>
                 ))}
@@ -141,14 +141,14 @@ export const Newsroom = () => {
                     const label = status === "active" ? `Deneme erişimi · ${daysLeft(a.trialEnd)} gün kaldı` : a.isTrial ? "Deneme erişimi" : "Duyuru";
                     return (
                         <li key={a.slug} data-rise className={i >= 4 ? "hidden lg:block" : ""}>
-                            <Link to={`/duyurular/${a.slug}`} className="kun-tile !bg-white group flex h-full flex-col overflow-hidden">
-                                <span className="relative block aspect-[16/10] bg-[#fbfbfd] border-b border-[#f0f0f2]">
+                            <Link to={`/duyurular/${a.slug}`} className="kun-tile group flex h-full flex-col overflow-hidden">
+                                <span className="relative block aspect-[16/10] bg-[#f4efe7]">
                                     {a.image && <img src={media(a.image)} alt="" loading="lazy" className="absolute inset-0 m-auto max-w-[78%] max-h-[72%] object-contain" />}
                                 </span>
                                 <span className="flex flex-1 flex-col p-6">
-                                    <span className={`text-[0.72rem] font-semibold uppercase tracking-[0.06em] ${status === "active" ? "text-[var(--kun-accent)]" : "text-[#6e6e73]"}`}>{label}</span>
-                                    <span className="mt-2 text-[1.15rem] font-semibold leading-snug tracking-tight text-[#1d1d1f] line-clamp-3">{a.title}</span>
-                                    <time dateTime={a.date} className="mt-auto pt-4 text-[0.82rem] text-[#6e6e73]">{formatDate(a.date)}</time>
+                                    <span className={`text-[0.72rem] font-semibold uppercase tracking-[0.06em] ${status === "active" ? "text-[var(--kun-accent)]" : "text-[#b1a696]"}`}>{label}</span>
+                                    <span className="mt-2 text-[1.15rem] font-semibold leading-snug tracking-tight text-[#f4efe7] line-clamp-3">{a.title}</span>
+                                    <time dateTime={a.date} className="mt-auto pt-4 text-[0.82rem] text-[#b1a696]">{formatDate(a.date)}</time>
                                 </span>
                             </Link>
                         </li>
@@ -182,20 +182,20 @@ export const ResourceStats = () => {
                 {tiles.map((t, i) => (
                     <li key={t.type} data-rise className={i < 2 ? "col-span-2 lg:col-span-2" : ""}>
                         <Link to={t.to} className="kun-tile group flex h-full flex-col justify-between gap-8 p-6 md:p-7">
-                            <span className="text-[1rem] font-semibold tracking-tight text-[#1d1d1f]">{t.label}</span>
+                            <span className="text-[1rem] font-semibold tracking-tight text-[#f4efe7]">{t.label}</span>
                             <span>
-                                <span className={`block font-semibold tracking-tight text-[#1d1d1f] leading-none ${i < 2 ? "text-6xl md:text-7xl" : "text-5xl"}`}>{t.n}</span>
-                                <span className="mt-2 flex items-center justify-between gap-2 text-[0.85rem] text-[#6e6e73]">
-                                    {t.unit}<MdChevronRight aria-hidden="true" className="w-5 h-5 text-[#86868b] group-hover:text-[var(--kun-accent)]" />
+                                <span className={`block font-semibold tracking-tight text-[#f4efe7] leading-none ${i < 2 ? "text-6xl md:text-7xl" : "text-5xl"}`}>{t.n}</span>
+                                <span className="mt-2 flex items-center justify-between gap-2 text-[0.85rem] text-[#b1a696]">
+                                    {t.unit}<MdChevronRight aria-hidden="true" className="w-5 h-5 text-[#8a8073] group-hover:text-[var(--kun-accent)]" />
                                 </span>
                             </span>
                         </Link>
                     </li>
                 ))}
                 <li data-rise>
-                    <Link to="/yerleske-disi-erisim" className="kun-tile !bg-[#1d1d1f] group flex h-full flex-col justify-between gap-8 p-6 md:p-7 text-white">
+                    <Link to="/yerleske-disi-erisim" className="kun-tile !bg-[#f4efe7] group flex h-full flex-col justify-between gap-8 p-6 md:p-7 text-[#2a2725]">
                         <span className="text-[1rem] font-semibold tracking-tight">Yerleşke Dışı Erişim</span>
-                        <span className="flex items-center justify-between gap-2 text-[0.85rem] text-white/70">Kılavuzlar<MdChevronRight aria-hidden="true" className="w-5 h-5" /></span>
+                        <span className="flex items-center justify-between gap-2 text-[0.85rem] text-[#5e574f]">Kılavuzlar<MdChevronRight aria-hidden="true" className="w-5 h-5" /></span>
                     </Link>
                 </li>
             </ul>
@@ -222,8 +222,8 @@ export const LibrariesRail = () => {
                 <div className="flex items-center gap-4">
                     <Link to="/kutuphanelerimiz" className="kun-more">Tümünü görün</Link>
                     <div className="hidden md:flex gap-2">
-                        <button type="button" aria-label="Önceki" onClick={() => scroll(-1)} className="w-9 h-9 rounded-full bg-[#e8e8ed] hover:bg-[#dcdce1] inline-flex items-center justify-center"><MdChevronLeft aria-hidden="true" className="w-5 h-5" /></button>
-                        <button type="button" aria-label="Sonraki" onClick={() => scroll(1)} className="w-9 h-9 rounded-full bg-[#e8e8ed] hover:bg-[#dcdce1] inline-flex items-center justify-center"><MdChevronRight aria-hidden="true" className="w-5 h-5" /></button>
+                        <button type="button" aria-label="Önceki" onClick={() => scroll(-1)} className="w-9 h-9 rounded-full bg-[#2a2725] hover:bg-[#33302d] inline-flex items-center justify-center"><MdChevronLeft aria-hidden="true" className="w-5 h-5" /></button>
+                        <button type="button" aria-label="Sonraki" onClick={() => scroll(1)} className="w-9 h-9 rounded-full bg-[#2a2725] hover:bg-[#33302d] inline-flex items-center justify-center"><MdChevronRight aria-hidden="true" className="w-5 h-5" /></button>
                     </div>
                 </div>
             </div>
@@ -232,7 +232,7 @@ export const LibrariesRail = () => {
                     const st = statusNow(l.hours?.schedule);
                     return (
                         <li key={l.name} className="shrink-0 w-[82vw] sm:w-[400px]">
-                            <Link to={`/kutuphanelerimiz#${l.slug}`} className="group relative block h-[480px] md:h-[540px] rounded-[22px] overflow-hidden bg-[#d2d2d7]">
+                            <Link to={`/kutuphanelerimiz#${l.slug}`} className="group relative block h-[480px] md:h-[540px] rounded-[2rem] overflow-hidden bg-[#2a2725]">
                                 {l.photo && <img src={media(l.photo[0])} alt={l.photo[1]} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />}
                                 <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/0 to-black/45" />
                                 <span className="absolute top-0 inset-x-0 p-6 text-white">
@@ -241,7 +241,7 @@ export const LibrariesRail = () => {
                                 </span>
                                 <span className="absolute bottom-0 inset-x-0 p-6 flex items-end justify-between gap-3 text-white">
                                     <span className="text-[0.85rem] text-white/90 max-w-[16rem]">{l.paragraphs.at(-1)}</span>
-                                    {st && <span className="shrink-0 rounded-full bg-white/90 text-[#1d1d1f] px-3 py-1 text-[0.75rem] font-medium">{st.open ? "Şu an açık" : "Şu an kapalı"}</span>}
+                                    {st && <span className="shrink-0 rounded-full bg-white/90 text-[#f4efe7] px-3 py-1 text-[0.75rem] font-medium">{st.open ? "Şu an açık" : "Şu an kapalı"}</span>}
                                 </span>
                             </Link>
                         </li>
@@ -266,12 +266,12 @@ export const OpenScience = () => {
                     {/* "Açık Bilim ve Kütüphane Komisyonu" page, first sentence */}
                     <p className="kun-lead mt-4">Kapadokya Üniversitesi Açık Bilim ve Kütüphane Komisyonu, Kapadokya Üniversitesi mensuplarının araştırma verilerinin ve akademik çalışmalarının, açık erişime sunulmasına ilişkin usul ve esasları düzenlemek ve açık erişimle, araştırma verileri ile akademik çalışmaların görünürlüğünü, izlenebilirliğini ve etkinliğini artırmayı amaçlamaktadır.</p>
                 </div>
-                <ul className="lg:col-span-7 border-t border-[#d2d2d7]">
+                <ul className="lg:col-span-7 border-t border-[#4f4b48]">
                     {links.map((l) => (
-                        <li key={l.label} data-rise className="border-b border-[#d2d2d7]">
+                        <li key={l.label} data-rise className="border-b border-[#4f4b48]">
                             <SmartLink to={l.to} href={l.href} className="group flex items-center justify-between gap-6 py-4">
-                                <span className="text-[1.05rem] font-medium tracking-tight text-[#1d1d1f] group-hover:text-[var(--kun-accent)]">{l.label}</span>
-                                {l.href ? <MdArrowOutward aria-hidden="true" className="shrink-0 text-[#86868b]" /> : <MdChevronRight aria-hidden="true" className="shrink-0 w-6 h-6 text-[#86868b]" />}
+                                <span className="text-[1.05rem] font-medium tracking-tight text-[#f4efe7] group-hover:text-[var(--kun-accent)]">{l.label}</span>
+                                {l.href ? <MdArrowOutward aria-hidden="true" className="shrink-0 text-[#8a8073]" /> : <MdChevronRight aria-hidden="true" className="shrink-0 w-6 h-6 text-[#8a8073]" />}
                             </SmartLink>
                         </li>
                     ))}

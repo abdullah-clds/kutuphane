@@ -3,10 +3,13 @@ import gsap from "gsap";
 import { ScrollSmoother } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import GlobalNav from "../components/GlobalNav/GlobalNav";
+import Navbar from "../components/Navbar/Navbar";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import PreloaderII from "../components/Preloader/PreloaderII";
+import ReserveBtn from "../components/Buttons/ReserveBtn";
+import Logo from "../components/Buttons/Logo";
 import Footer from "../components/Footer/Footer";
+import FooterTitle from "../components/Footer/FooterTitle";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -117,9 +120,11 @@ const MainLayout = () => {
 
     return (
         <>
-            <a href="#icerik" className="sr-only-focusable fixed top-3 left-3 z-[60] bg-[#0a5cad] text-white px-4 py-2 rounded-full text-sm">İçeriğe geç</a>
+            <a href="#icerik" className="sr-only-focusable fixed top-3 left-3 z-[60] bg-[#f4efe7] text-[#2a2725] px-4 py-2 rounded-4xl text-sm">İçeriğe geç</a>
             <PreloaderII />
-            <GlobalNav />
+            <Logo />
+            <ReserveBtn />
+            <Navbar />
             <div id="smooth-wrapper">
                 <div id="smooth-content">
                     <main id="icerik">
@@ -127,6 +132,7 @@ const MainLayout = () => {
                             <Outlet />
                         </div>
                         <Footer />
+                        <FooterTitle />
                     </main>
                 </div>
             </div>

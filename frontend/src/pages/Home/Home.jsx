@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import Hero from '../../components/Hero/Hero'
-import { IntroSearch, TodayHours, Explore, Newsroom, ResourceStats, LibrariesRail, OpenScience, AskLibrarian, useBandReveal } from '../../components/Home/Sections'
+import Gallery from '../../components/Gallery/Gallery'
+import { IntroSearch, TodayHours, Explore, Newsroom, ResourceStats, AskLibrarian, useBandReveal } from '../../components/Home/Sections'
 
-// Homepage: the Capsule intro (preloader + photo slider) stays; everything below follows the
-// Harvard Library structure in an Apple-like visual language (docs/SECTION-MAPPING.md).
+// Homepage: the theme's intro (preloader + photo slider) and its library area (Gallery) stay as they
+// are; the other sections follow Harvard Library's structure, drawn in the theme's own dark language.
 const Home = () => {
     const scope = useRef(null)
     useBandReveal(scope)
@@ -11,12 +12,11 @@ const Home = () => {
         <div ref={scope}>
             <Hero />
             <IntroSearch />
-            <TodayHours />
             <Newsroom />
+            <TodayHours />
+            <Gallery />
             <ResourceStats />
-            <LibrariesRail />
             <Explore />
-            <OpenScience />
             <AskLibrarian />
         </div >
     )
