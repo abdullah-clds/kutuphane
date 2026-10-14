@@ -5,15 +5,11 @@ import Choose from '../../components/Choose/Choose'
 import StickyCols from '../../components/StickyCols/StickyCols'
 import Gallery from '../../components/Gallery/Gallery'
 import MarqueeSticky from '../../components/Layouts/MarqueeSticky'
-import MapLink from '../../components/MapLink/MapLink'
-import Activities from '../../components/Activities/Activities'
-import Showcase from '../../components/Showcase/Showcase'
-import Feedback from '../../components/Feedback/Feedback'
-import FooterBanner from '../../components/FooterBanner/FooterBanner'
 import AnnouncementsSection from '../../components/Announcements/AnnouncementsSection'
+import ServicesStrip from '../../components/Services/ServicesStrip'
 
-// Section order (see docs/SECTION-MAPPING.md). The hero greets with the library photographs; announcements
-// have their own panel after the introduction; the theme's sections follow with library content. Background colours chain as before.
+// Compact homepage (see docs/SECTION-MAPPING.md). Activities, Showcase, Feedback, MapLink and
+// FooterBanner are no longer on the homepage; their content lives on the inner pages.
 const Home = () => {
     return (
         <div>
@@ -22,13 +18,9 @@ const Home = () => {
             <AnnouncementsSection />
             <Choose />
             <Gallery />
-            <MapLink />
             <MarqueeSticky />
             <StickyCols />
-            <Activities />
-            <Showcase />
-            <Feedback />
-            <FooterBanner />
+            <ServicesStrip />
         </div >
     )
 }
