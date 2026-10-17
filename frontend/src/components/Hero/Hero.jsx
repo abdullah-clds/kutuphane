@@ -26,6 +26,7 @@ const Hero = () => {
     const [index, setIndex] = useState(0);
     const [paused, setPaused] = useState(false);
     const sectionRef = useRef(null);
+    const titleRef = useRef(null);
     const first = useRef(true);
     const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -47,6 +48,23 @@ const Hero = () => {
             });
         };
     }, [isMobHero]);
+
+
+    // Title entrance once the preloader opens: "Kütüp" rises from its mask, "hane" glides in.
+    useGSAP(() => {
+        if (reduce) return;
+        const kutup = titleRef.current.querySelector("[data-kutup]");
+        const hane = titleRef.current.querySelector("[data-hane]");
+        gsap.set(kutup, { yPercent: 110 });
+        gsap.set(hane, { autoAlpha: 0, xPercent: 18, filter: "blur(10px)" });
+        const play = () => {
+            gsap.to(kutup, { yPercent: 0, duration: 1.3, ease: "power4.out" });
+            gsap.to(hane, { autoAlpha: 1, xPercent: 0, filter: "blur(0px)", duration: 1.6, ease: "power3.out", delay: 0.35 });
+        };
+        if (window.__kunPreloaded) play();
+        else window.addEventListener("kun:preloaded", play, { once: true });
+        return () => window.removeEventListener("kun:preloaded", play);
+    }, { scope: sectionRef });
 
     // Slide change: the incoming photo opens from the bottom edge (the clip-path reveal used in
     // StickyCols) while it settles from 1.15 to 1.
@@ -120,7 +138,12 @@ const Hero = () => {
                             className="text-[#f4efe7] text-start text-[length:var(--fs-display)] font-medium leading-[0.9] tracking-[-0.03em] lg:absolute lg:left-1.5 pl-1.5 lg:pl-0 pt-20 md:pt-24 relative z-20"
                             style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}
                         >
-                            <span className="sr-only">Kapadokya Üniversitesi </span>Kütüphane
+                            <span className="sr-only">Kapadokya Üniversitesi Kütüphane</span>
+                            {/* "Kütüp" (books) upright, "hane" (house) in an italic serif */}
+                            <span ref={titleRef} aria-hidden="true" className="inline-flex items-baseline whitespace-nowrap">
+                                <span className="inline-block overflow-hidden pb-[0.08em] -mb-[0.08em]"><span data-kutup className="inline-block font-semibold tracking-[-0.045em]">Kütüp</span></span>
+                                <span data-hane className="kun-serif inline-block italic text-[1.18em] leading-none tracking-[-0.01em] ml-[0.015em]">hane</span>
+                            </span>
                         </h1>
 
                         <div className="w-full h-auto absolute z-20 bottom-28 md:top-24 md:bottom-[8%] lg:bottom-[9%] px-1.5 flex md:flex-row flex-col md:justify-between md:items-end gap-6 md:gap-0">

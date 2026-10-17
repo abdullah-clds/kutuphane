@@ -9,3 +9,5 @@ dist
 
 # Upscaled source photos (the optimized JPGs live in frontend/public/media/site)
 content/gorseller/*-ups*.png
+.vercel
+.env*

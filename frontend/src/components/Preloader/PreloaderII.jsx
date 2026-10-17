@@ -106,6 +106,7 @@ export default function PreloaderII() {
                 },
                 "<"
             )
+            .call(() => { window.__kunPreloaded = true; window.dispatchEvent(new Event("kun:preloaded")); }, null, "<")
             .to(
                 ".preloader-mask",
                 {

@@ -6,12 +6,13 @@ Kapadokya Üniversitesi Kütüphanesi sitesini değiştirmek, kaydetmek (commit)
 
 | Ne | Adres |
 |---|---|
-| Canlı site | https://abdullah-clds.github.io/kutuphane/ |
+| **Paylaşılacak link (Vercel)** | **https://kutuphane-kapadokya.vercel.app** |
+| Yedek yayın (GitHub Pages) | https://abdullah-clds.github.io/kutuphane/ |
 | Kod deposu (GitHub) | https://github.com/abdullah-clds/kutuphane |
 | Yayın durumu (Actions) | https://github.com/abdullah-clds/kutuphane/actions |
 | Bilgisayardaki klasör | `~/Desktop/kutuphane-kapadokya/capsule-main` |
 
-> Canlı sitenin adresi sonunda `/kutuphane/` olan adrestir. `github.com/...` adresi sitenin kendisi değil, kodun durduğu depodur.
+> Personelle paylaşılacak adres Vercel adresidir. GitHub Pages adresi yedektir ve sonunda `/kutuphane/` olmalıdır. `github.com/...` adresi sitenin kendisi değil, kodun durduğu depodur.
 
 ## Klasör yapısı (kısaca)
 
@@ -53,7 +54,20 @@ git commit -m "Kısa açıklama: ne değişti"
 git push                           # GitHub'a gönder = yayına al
 ```
 
-`git push` yapıldığı anda GitHub site otomatik olarak yeniden derleyip yayına alır. Bu yaklaşık **1–2 dakika** sürer.
+`git push` yapıldığı anda GitHub Pages sürümü otomatik olarak yeniden derlenip yayına alınır (yaklaşık **1–2 dakika**).
+
+### Vercel (paylaşılan link) güncelleme
+
+Vercel'in GitHub bağlantısı kurulduysa `git push` Vercel'i de otomatik günceller. Kurulmadıysa (ya da hemen güncellemek isterseniz) proje klasöründen:
+
+```bash
+cd ~/Desktop/kutuphane-kapadokya/capsule-main
+npx vercel deploy --prod --yes
+```
+
+Otomatik güncellemeyi bir kez açmak için: https://vercel.com/abdullah-c300/kutuphane-kapadokya/settings/git → **Connect Git Repository** → GitHub → `abdullah-clds/kutuphane`. (GitHub, Vercel uygulamasına depo erişimi vermenizi isteyecek.)
+
+Vercel ayarları depo kökündeki `vercel.json` dosyasında: kurulum `frontend` içinde yapılır, çıktı `frontend/dist`, tüm adresler `index.html`'e yönlendirilir (alt sayfalar doğrudan açılır, 404 sorunu yoktur). Site Vercel'de kök adresten sunulduğu için `VITE_BASE` gerekmez.
 
 ### Commit mesajı nasıl yazılır?
 
@@ -91,6 +105,7 @@ git push
 | `git push` sırasında `refusing to allow an OAuth App to create or update workflow` | GitHub oturumunda iş akışı izni yok. Terminalde `gh auth refresh -h github.com -s workflow` çalıştırıp tarayıcıda onaylayın, sonra yeniden `git push`. |
 | Actions'ta `Rollup failed to resolve import "…"` | Kullanılan bir paket `frontend/package.json`'da yok. `cd frontend && npm install paket-adi --save`, sonra commit + push. (Üst klasördeki `package.json` yayında kullanılmaz.) |
 | Görseller canlıda kırık, bilgisayarda düzgün | Kodda görsel yolu `/media/...` diye sabit yazılmış olabilir. Görselleri `media("media/...")` yardımcısıyla, HTML metinlerini `Prose` bileşeniyle gösterin; ikisi de `/kutuphane/` alt adresini ekler. |
+| Vercel'de `vercel` komutu giriş istiyor | Bir kez `npx vercel login` çalıştırıp tarayıcıda onaylayın. |
 | Canlı site eski hâliyle görünüyor | Yayın bitmemiş olabilir (Actions'a bakın) ya da tarayıcı önbelleği: **Cmd + Shift + R** veya gizli pencere. |
 | Alt sayfalar (ör. /duyurular) teknik olarak "404" dönüyor ama açılıyor | GitHub Pages'in sınırı; `404.html` yedeği uygulamayı açar. Ziyaretçiyi etkilemez. Site kendi alan adına (ör. kutuphane.kapadokya.edu.tr) taşınırken sunucu tarafında tek sayfa uygulama yönlendirmesi kurulmalıdır. |
 

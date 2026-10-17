@@ -1,0 +1,4 @@
+docs
+content/gorseller/*-ups*.png
+frontend/dist
+**/node_modules
