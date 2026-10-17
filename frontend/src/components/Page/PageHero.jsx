@@ -44,7 +44,7 @@ const PageHero = ({ title, eyebrow, crumbs = [], image, imageAlt = "", contain =
     const height = size === "sm" ? "h-[62vh] md:h-[70vh]" : "h-[74vh] md:h-[86vh]";
 
     return (
-        <section ref={ref} className={`page-hero w-full ${height} p-2.5 md:p-2 mb-16 md:mb-24`}>
+        <section ref={ref} className={`page-hero w-full ${height} p-2.5 md:p-2 mb-10 md:mb-14`}>
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-[#2a2725]">
                 {image && !contain && (
                     <img src={media(image)} alt={imageAlt} className="page-hero-img absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
@@ -77,7 +77,7 @@ const PageHero = ({ title, eyebrow, crumbs = [], image, imageAlt = "", contain =
                 <div className="absolute inset-x-0 bottom-0 p-5 md:p-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                     <div className={contain ? "md:max-w-[52%]" : "md:max-w-[72%]"}>
                         {eyebrow && <p data-hero-fade className="text-[0.7rem] font-bold text-[#eae5dd] mb-4">{eyebrow}</p>}
-                        <h1 className={`text-[#f4efe7] font-bold tracking-tight leading-[0.95] [text-wrap:balance] ${String(title).length > 55 ? "text-[clamp(1.9rem,3.6vw,3.9rem)] leading-[1.02]" : contain ? "text-[clamp(2.2rem,4.8vw,5rem)]" : "text-[clamp(2.4rem,6.4vw,7rem)]"}`} style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}>
+                        <h1 className={`text-[#f4efe7] font-medium tracking-[-0.025em] leading-[0.95] [text-wrap:balance] ${String(title).length > 55 ? "text-[length:var(--fs-h2)] leading-[1.02]" : contain ? "text-[length:var(--fs-h1)]" : "text-[length:var(--fs-display)]"}`} style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}>
                             {title}
                         </h1>
                     </div>

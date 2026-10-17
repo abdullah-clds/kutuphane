@@ -41,15 +41,15 @@
 
 .gallery-slider .gallery-box {
     position: relative;
-    min-width: calc(50rem * 5);
-    height: 15rem;
+    min-width: calc(38rem * 5);
+    height: 11rem;
     display: flex;
     gap: 2rem;
 }
 
 .gallery-slider .gallery-box h3 {
-    font-size: 10rem;
-    width: 50rem;
+    font-size: var(--fs-display);
+    width: 38rem;
     position: absolute;
     color: #f4efe7;
     font-weight: 600;
@@ -60,7 +60,7 @@
 
 @keyframes gallery-animate {
     to {
-        left: -50rem;
+        left: -38rem;
     }
 }
 
@@ -149,13 +149,13 @@
 }
 
 .gallery-topText h4 {
-    font-size: clamp(2.25rem, 5vw, 5rem);
+    font-size: var(--fs-h1);
     line-height: 1;
     letter-spacing: -0.02em;
 }
 
 .gallery-topText h3 {
-    font-size: clamp(1.25rem, 3vw, 3rem);
+    font-size: var(--fs-h3);
     flex-shrink: 0;
 }
 
@@ -172,7 +172,7 @@
     }
 
     .gallery-slider .gallery-box h3 {
-        font-size: 6rem;
+        font-size: 4.5rem;
     }
 
     .gallery-topText {

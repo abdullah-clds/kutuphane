@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import PageHero from "../../components/Page/PageHero";
-import PageAside from "../../components/Page/PageAside";
+import PageLayout from "../../components/Page/PageLayout";
 import Prose from "../../components/Page/Prose";
 import useReveal from "../../components/Page/useReveal";
 import NotFound from "../NotFound/NotFound";
@@ -29,12 +29,9 @@ const ServicePage = () => {
                 size="sm"
                 aside={<>Araştırma hizmeti</>}
             />
-            <div className="px-6 md:px-8 pb-28 grid gap-14 lg:grid-cols-12">
-                <div className="lg:col-span-3"><PageAside /></div>
-                <div className="lg:col-span-8 lg:col-start-5" data-reveal>
-                    <Prose html={s.html} className="text-[1.35rem]" />
-                </div>
-            </div>
+            <PageLayout>
+                <Prose html={s.html} />
+            </PageLayout>
         </article>
     );
 };

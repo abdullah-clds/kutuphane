@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import PageHero from "../../components/Page/PageHero";
-import PageAside from "../../components/Page/PageAside";
+import PageLayout from "../../components/Page/PageLayout";
 import Prose from "../../components/Page/Prose";
 import useReveal from "../../components/Page/useReveal";
 import { findPage } from "../../lib/content";
@@ -41,14 +41,9 @@ const ContentPage = ({ route }) => {
                 size="sm"
                 aside={<>Kapadokya Üniversitesi<br />Kütüphane ve Dokümantasyon Daire Başkanlığı</>}
             />
-            <div className="px-6 md:px-8 pb-28 grid gap-14 lg:grid-cols-12">
-                <div className="lg:col-span-3">
-                    <PageAside updated={page.updated} sourceUrl={page.sourceUrl} />
-                </div>
-                <div className="lg:col-span-8 lg:col-start-5" data-reveal>
-                    <Prose html={page.html} className={COLUMNS.has(route) ? "kun-columns max-w-none" : ""} />
-                </div>
-            </div>
+            <PageLayout updated={page.updated}>
+                <Prose html={page.html} className={COLUMNS.has(route) ? "kun-columns max-w-none" : ""} />
+            </PageLayout>
         </article>
     );
 };

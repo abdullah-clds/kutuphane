@@ -83,9 +83,9 @@ const Hero = () => {
             className="hero-section w-dvw md:h-dvh h-[100vh] md:p-2 p-2.5"
         >
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
-                <div className="responsive-mobile">
+                <div className="absolute inset-0">
                     {/* Background images (down layer) */}
-                    <div className="hero-img absolute inset-0 z-0 md:block hidden">
+                    <div className="hero-img absolute inset-0 z-0">
                         {SLIDES.map((s, i) => (
                             <div key={s.src} data-shown={i === 0 ? "1" : "0"} className="hero-slide absolute inset-0 overflow-hidden" style={{ zIndex: i === 0 ? 2 : 0 }}>
                                 <div
@@ -99,22 +99,8 @@ const Hero = () => {
                         ))}
                     </div>
 
-                    {/* Mobile image (same slides, cross-fade) */}
-                    <div className="block lg:hidden mt-6 mb-6 relative w-full aspect-[3/2] rounded-[2rem] overflow-hidden shadow-[0_-25px_45px_-10px_rgba(255,0,0,0.15)] md:hidden">
-                        {SLIDES.map((s, i) => (
-                            <img
-                                key={s.src}
-                                src={s.url}
-                                alt={i === index ? s.alt : ""}
-                                aria-hidden={i !== index}
-                                loading={i === 0 ? "eager" : "lazy"}
-                                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === index ? "opacity-100" : "opacity-0"}`}
-                            />
-                        ))}
-                    </div>
-
                     {/* Legibility: the library photos are brighter than the theme's dusk image */}
-                    <div aria-hidden="true" className="absolute inset-0 z-[5] bg-gradient-to-t from-[#181717]/70 via-transparent to-[#181717]/35 md:block hidden" />
+                    <div aria-hidden="true" className="absolute inset-0 z-[5] bg-gradient-to-t from-[#181717]/85 via-[#181717]/10 to-[#181717]/45 md:from-[#181717]/70 md:via-transparent md:to-[#181717]/35" />
 
                     {/* Smoke video (upper layer) */}
                     <video
@@ -124,23 +110,23 @@ const Hero = () => {
                         aria-hidden="true"
                         muted
                         playsInline
-                        className="absolute inset-0 md:w-full md:h-full object-cover z-10 pointer-events-none object-center opacity-50 mix-blend-hard-light md:top-0 top-[5%] h-[90%]  rounded-[2rem] md:px-0"
+                        className="hidden md:block absolute inset-0 w-full h-full object-cover z-10 pointer-events-none object-center opacity-50 mix-blend-hard-light"
                     ></video>
                 </div>
                 <div className="p-4 flex flex-col md:justify-center">
                     <div className="relative h-dvh">
                         {/* Logo sits top-left (outside the card), so the title starts below it */}
                         <h1
-                            className="text-[#f4efe7] text-start text-6xl md:text-9xl font-bold tracking-wider lg:absolute lg:left-2 pt-16 md:pt-20 relative z-20"
-                            style={{ textShadow: '2px 2px 4px #aaa' }}
+                            className="text-[#f4efe7] text-start text-[length:var(--fs-display)] font-medium leading-[0.9] tracking-[-0.03em] lg:absolute lg:left-1.5 pl-1.5 lg:pl-0 pt-20 md:pt-24 relative z-20"
+                            style={{ textShadow: "0 2px 18px rgba(0,0,0,0.35)" }}
                         >
                             <span className="sr-only">Kapadokya Üniversitesi </span>Kütüphane
                         </h1>
 
-                        <div className="w-full h-auto absolute z-20 top-36 md:top-24 md:bottom-[8%] lg:bottom-[9%] flex md:flex-row flex-col md:justify-between md:items-end">
+                        <div className="w-full h-auto absolute z-20 bottom-28 md:top-24 md:bottom-[8%] lg:bottom-[9%] px-1.5 flex md:flex-row flex-col md:justify-between md:items-end gap-6 md:gap-0">
                             <h2
-                                className="text-start lg:mt-0 md:text-[#f4efe7] text-[#b1a696] text-2xl font-bold md:tracking-wider leading-5 flex flex-col gap-1"
-                                style={{ textShadow: '2px 2px 4px #000' }}
+                                className="text-start lg:mt-0 text-[#f4efe7] text-[length:var(--fs-h3)] font-medium leading-[1.05] tracking-tight flex flex-col"
+                                style={{ textShadow: "0 2px 12px rgba(0,0,0,0.45)" }}
                             >
                                 <span>Bilgiye</span>
                                 <span>Açılan</span>
@@ -148,7 +134,7 @@ const Hero = () => {
                             </h2>
 
                             <div
-                                className="md:w-[24%] w-[80%] flex flex-col gap-4 md:items-end mt-4 md:mt-0"
+                                className="md:w-[24%] w-full flex flex-col gap-3 md:gap-4 md:items-end"
                                 onMouseEnter={() => setPaused(true)}
                                 onMouseLeave={() => setPaused(false)}
                                 onFocus={() => setPaused(true)}

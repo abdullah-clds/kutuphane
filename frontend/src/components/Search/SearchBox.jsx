@@ -15,7 +15,7 @@ const SCOPES = [
  * One search field, three scopes. Catalogue and discovery submit the original GET forms
  * (new tab); "Bu sitede" lists matching pages, announcements and resources instantly.
  */
-const SearchBox = ({ initial = "ebsco", size = "lg" }) => {
+const SearchBox = ({ initial = "ebsco", size = "lg", center = false, tone = "dark" }) => {
     const [scope, setScope] = useState(initial);
     const [q, setQ] = useState("");
     const id = useId();
@@ -30,8 +30,8 @@ const SearchBox = ({ initial = "ebsco", size = "lg" }) => {
     };
 
     return (
-        <div>
-            <div role="radiogroup" aria-label="Arama kapsamı" className="flex flex-wrap gap-2">
+        <div className={tone === "light" ? "kun-search-light" : undefined}>
+            <div role="radiogroup" aria-label="Arama kapsamı" className={`flex flex-wrap gap-2 ${center ? "justify-center" : ""}`}>
                 {SCOPES.map((s) => (
                     <button key={s.key} type="button" role="radio" aria-checked={scope === s.key} aria-pressed={scope === s.key} onClick={() => setScope(s.key)} className="kun-chip">
                         {s.label}
@@ -48,8 +48,8 @@ const SearchBox = ({ initial = "ebsco", size = "lg" }) => {
                 </div>
             </form>
             {scope !== "site" && (
-                <p className="mt-3 text-[0.8rem] text-[#b1a696]">
-                    {ext.system} · sonuçlar yeni sekmede açılır · <a href={ext.home} target="_blank" rel="noopener noreferrer" className="text-[var(--kun-accent)] hover:underline">gelişmiş arama</a>
+                <p className={`mt-3 text-[0.8rem] ${tone === "light" ? "text-[#8a7f70]" : "text-[#b1a696]"} ${center ? "text-center" : ""}`}>
+                    {ext.system} · sonuçlar yeni sekmede açılır · <a href={ext.home} target="_blank" rel="noopener noreferrer" className={`${tone === "light" ? "text-[#2a2725] underline" : "text-[var(--kun-accent)]"} hover:underline`}>gelişmiş arama</a>
                 </p>
             )}
             {scope === "site" && q.trim().length >= 2 && (

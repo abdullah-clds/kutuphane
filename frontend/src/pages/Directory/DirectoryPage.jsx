@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import PageHero from "../../components/Page/PageHero";
 import useReveal from "../../components/Page/useReveal";
 import DatabaseRow from "./DatabaseRow";
-import { DIRECTORY_LABELS, DIRECTORY_ROUTES, findPage, formatDate, trialStatus, visibleDatabases } from "../../lib/content";
+import { MdArrowOutward } from "react-icons/md";
+import { FilterCard, FilterOption, FilterPanel, ResultsHeader, Segmented } from "../../components/Page/ListParts";
+import { DIRECTORY_LABELS, DIRECTORY_ROUTES, countByType, findPage, formatDate, trialStatus, visibleDatabases } from "../../lib/content";
 
 const HERO = {
     all: "media/site/kutup-banner.jpg",
@@ -57,9 +59,6 @@ const DirectoryPage = ({ type }) => {
 
     useReveal(scope, [type]);
 
-    const pill = (active) =>
-        `border-[1px] rounded-full px-4 py-1 text-sm transition-colors duration-300 ${active ? "bg-[#f4efe7] border-[#f4efe7] text-[#2a2725]" : "border-[#4f4b48] text-[#b1a696] hover:text-[#f4efe7] hover:border-[#b1a696]"}`;
-
     return (
         <div ref={scope}>
             <PageHero
@@ -72,63 +71,62 @@ const DirectoryPage = ({ type }) => {
                 aside={<>{base.length} kaynak{page?.updated ? <><br />Son güncelleme {formatDate(page.updated)}</> : null}</>}
             />
 
-            <section className="px-6 md:px-8 pb-28" aria-label={`${title} listesi`}>
-                {/* Collection switcher: links on single pages, a filter on the combined page */}
-                <nav aria-label="Kaynak türleri" className="flex flex-wrap gap-2" data-reveal>
-                    {type === "all" ? (
-                        <>
-                            <button type="button" aria-pressed={kind === "all"} onClick={() => { setKind("all"); setLetter(null); }} className={pill(kind === "all")}>Tümü ({visibleDatabases.length})</button>
-                            {Object.entries(DIRECTORY_LABELS).map(([k, label]) => (
-                                <button key={k} type="button" aria-pressed={kind === k} onClick={() => { setKind(k); setLetter(null); }} className={pill(kind === k)}>
-                                    {label} ({visibleDatabases.filter((d) => d.type === k).length})
-                                </button>
+            <section className="kun-wrap pb-28 grid gap-10 lg:grid-cols-12 lg:gap-12" aria-label={`${title} listesi`}>
+                <FilterPanel active={Boolean(letter) + (type === "all" && kind !== "all")}>
+                    {/* Collections: links between the pages, or a filter on the combined page */}
+                    <FilterCard title="Kaynak türleri">
+                        <nav aria-label="Kaynak türleri" className="-mx-3 flex flex-col">
+                            {type === "all" ? (
+                                <>
+                                    <FilterOption active={kind === "all"} onClick={() => { setKind("all"); setLetter(null); }} label="Tümü" count={visibleDatabases.length} />
+                                    {Object.entries(DIRECTORY_LABELS).map(([k, label]) => (
+                                        <FilterOption key={k} active={kind === k} onClick={() => { setKind(k); setLetter(null); }} label={label} count={countByType(k)} />
+                                    ))}
+                                </>
+                            ) : (
+                                <>
+                                    <FilterOption as={Link} to="/elektronik-kaynaklar" label="Tümü" count={visibleDatabases.length} />
+                                    {Object.entries(DIRECTORY_LABELS).map(([k, label]) => (
+                                        <FilterOption key={k} as={Link} to={DIRECTORY_ROUTES[k]} aria-current={k === type ? "page" : undefined} active={k === type} label={label} count={countByType(k)} />
+                                    ))}
+                                </>
+                            )}
+                        </nav>
+                    </FilterCard>
+                    <FilterCard title="Baş harf">
+                        <div className="grid grid-cols-6 gap-1" role="group" aria-label="Baş harfe göre süz">
+                            <button type="button" aria-pressed={!letter} onClick={() => setLetter(null)} className={`col-span-2 h-9 rounded-lg text-[0.8rem] ${!letter ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:bg-[#262321] hover:text-[#f4efe7]"}`}>Tümü</button>
+                            {letters.map((l) => (
+                                <button key={l} type="button" aria-pressed={letter === l} onClick={() => setLetter(letter === l ? null : l)} className={`h-9 rounded-lg text-[0.85rem] ${letter === l ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:bg-[#262321] hover:text-[#f4efe7]"}`}>{l}</button>
                             ))}
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/elektronik-kaynaklar" className={pill(false)}>Tümü</Link>
-                            {Object.entries(DIRECTORY_LABELS).map(([k, label]) => (
-                                <Link key={k} to={DIRECTORY_ROUTES[k]} aria-current={k === type ? "page" : undefined} className={pill(k === type)}>{label}</Link>
-                            ))}
-                        </>
+                        </div>
+                    </FilterCard>
+                    {(effectiveType === "abone" || effectiveType === "all") && (
+                        <section className="rounded-[1.75rem] bg-[#f4efe7] p-5 md:p-6 text-[#2a2725]">
+                            <h2 className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#6b6259]">Yerleşke dışından</h2>
+                            <p className="mt-3 text-[0.9rem] leading-snug text-[#5e574f]">Abone olunan veri tabanlarına kampüs dışından erişim için kılavuzlara bakın.</p>
+                            <Link to="/yerleske-disi-erisim" className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#2a2725] px-4 py-2 text-[0.85rem] text-[#f4efe7] hover:bg-[#33302d]">Yerleşke Dışı Erişim<MdArrowOutward aria-hidden="true" className="w-4 h-4" /></Link>
+                        </section>
                     )}
-                </nav>
+                </FilterPanel>
 
-                <div className="mt-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between border-b border-[#4f4b48] pb-8" data-reveal>
-                    <label className="flex items-center gap-2 bg-[#f4efe7] rounded-full pl-5 pr-2 py-1 lg:w-[30rem]">
-                        <span className="sr-only">Kaynak adı veya açıklamasında ara</span>
-                        <input type="search" value={query} onChange={(e) => { setQuery(e.target.value); setLetter(null); }} placeholder="Kaynak adı veya konu arayın..." className="flex-1 min-w-0 bg-transparent py-2.5 text-[#2a2725] placeholder:text-[#8a7f70] outline-none" />
-                    </label>
-                    <div className="flex flex-wrap gap-2" role="group" aria-label="Sıralama">
-                        <button type="button" aria-pressed={sort === "az"} onClick={() => setSort("az")} className={pill(sort === "az")}>A–Z</button>
-                        <button type="button" aria-pressed={sort === "source"} onClick={() => setSort("source")} className={pill(sort === "source")}>Sayfadaki sıra</button>
-                    </div>
-                </div>
+                <div className="lg:col-span-9 min-w-0" data-reveal>
+                    <ResultsHeader query={query} onQuery={(v) => { setQuery(v); setLetter(null); }} placeholder="Kaynak adı veya konu arayın…" label="Kaynak adı veya açıklamasında ara"
+                        count={list.length} noun="kaynak" filtered={Boolean(query || letter || (type === "all" && kind !== "all"))}
+                        onReset={() => { setQuery(""); setLetter(null); setKind("all"); }}>
+                        <Segmented label="Sıralama" value={sort} onChange={setSort} options={[["az", "A–Z"], ["source", "Sayfadaki sıra"]]} />
+                    </ResultsHeader>
 
-                <div className="flex flex-wrap gap-1 mt-6" role="group" aria-label="Baş harfe göre süz" data-reveal>
-                    <button type="button" aria-pressed={!letter} onClick={() => setLetter(null)} className={`w-auto px-3 h-9 rounded-full text-sm ${!letter ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:text-[#f4efe7]"}`}>Tümü</button>
-                    {letters.map((l) => (
-                        <button key={l} type="button" aria-pressed={letter === l} onClick={() => setLetter(letter === l ? null : l)} className={`w-9 h-9 rounded-full text-sm ${letter === l ? "bg-[#f4efe7] text-[#2a2725]" : "text-[#b1a696] hover:text-[#f4efe7] hover:bg-[#2a2725]"}`}>{l}</button>
+                    {groups.map(([heading, items]) => items.length > 0 && (
+                        <div key={heading ?? "list"} className="mt-3">
+                            {heading && <h2 className="mt-10 mb-2 px-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[#8a8073]">{heading} <span className="tabular-nums">({items.length})</span></h2>}
+                            <ul className="flex flex-col divide-y divide-[#2a2725]">
+                                {items.map((d) => <DatabaseRow key={d.id} d={d} showType={type === "all"} />)}
+                            </ul>
+                        </div>
                     ))}
+                    {list.length === 0 && <p className="py-16 text-center text-[#b1a696]">Aramanızla eşleşen kaynak bulunamadı.</p>}
                 </div>
-
-                {(effectiveType === "abone" || effectiveType === "all") && (
-                    <p className="mt-6 text-[0.85rem] text-[#b1a696]">
-                        Yerleşke dışından erişim için <Link to="/yerleske-disi-erisim" className="text-[#f4efe7] underline underline-offset-4 decoration-[#4f4b48]">Yerleşke Dışı Erişim</Link> kılavuzlarına bakın.
-                    </p>
-                )}
-
-                <p className="text-[0.75rem] text-[#8a8073] mt-6" aria-live="polite">{list.length} kaynak listeleniyor</p>
-
-                {groups.map(([heading, items]) => (
-                    <div key={heading ?? "list"} className="mt-6">
-                        {heading && <h2 className="text-[.7rem] font-bold text-[#eae5dd] mt-12 mb-2">{heading} ({items.length})</h2>}
-                        <ul className="border-b border-[#4f4b48]">
-                            {items.map((d) => <DatabaseRow key={d.id} d={d} showType={type === "all"} />)}
-                        </ul>
-                    </div>
-                ))}
-                {list.length === 0 && <p className="py-16 text-[#b1a696]">Aramanızla eşleşen kaynak bulunamadı.</p>}
             </section>
         </div>
     );

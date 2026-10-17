@@ -370,6 +370,7 @@ body {
 
 /* Long-form institutional text. Calm, readable, in the theme's colours. */
 .kun-prose {
+	max-width: 46rem;
 	color: var(--kun-stone);
 	font-size: 1.125rem;
 	line-height: 1.7;
@@ -394,9 +395,9 @@ body {
 	margin-top: 2.2em;
 }
 
-.kun-prose h2 { font-size: 2.25rem; }
-.kun-prose h3 { font-size: 1.85rem; }
-.kun-prose h4 { font-size: 1.5rem; }
+.kun-prose h2 { font-size: clamp(1.6rem, 2.3vw, 2.1rem); font-weight: 500; letter-spacing: -0.02em; }
+.kun-prose h3 { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.015em; }
+.kun-prose h4 { font-size: 1.3rem; }
 .kun-prose h5,
 .kun-prose h6 { font-size: 1.3rem; }
 
@@ -509,28 +510,39 @@ body {
 }
 
 /* ---------- Homepage section blocks, in the theme's own language ---------- */
-:root { --kun-accent: #f4efe7; }
-
-.kun-wrap { padding-inline: 1.5rem; }
-@media (min-width: 768px) { .kun-wrap { padding-inline: 2rem; } }
-
-.kun-headline {
-	font-size: clamp(2.6rem, 6vw, 5.5rem);
-	line-height: 0.95;
-	font-weight: 500;
-	letter-spacing: -0.02em;
-	color: #f4efe7;
+:root {
+	--kun-accent: #f4efe7;
+	/* Type scale: one ratio, every size fluid between a phone and a 1280px+ desktop */
+	--fs-display: clamp(2.9rem, 7vw, 7rem);       /* hero titles */
+	--fs-h1: clamp(2.25rem, 5vw, 5rem);            /* inner page titles, gallery names */
+	--fs-h2: clamp(2.1rem, 3.6vw, 3.5rem);        /* section titles */
+	--fs-figure: clamp(4rem, 6vw, 5.5rem);        /* big standalone numbers */
+	--fs-h3: clamp(1.35rem, 2vw, 1.85rem);        /* card / feature titles */
+	--fs-lead: clamp(1.05rem, 1.35vw, 1.3rem);    /* intro paragraphs */
+	--fs-eyebrow: 0.72rem;                        /* uppercase labels */
 }
 
-.kun-title {
-	font-size: clamp(2.2rem, 4.2vw, 4rem);
+.kun-wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 1.5rem; }
+@media (min-width: 768px) { .kun-wrap { padding-inline: 3rem; } }
+@media (min-width: 1280px) { .kun-wrap { padding-inline: 4rem; } }
+
+.kun-headline {
+	font-size: var(--fs-h2);
 	line-height: 0.98;
 	font-weight: 500;
 	letter-spacing: -0.02em;
 	color: #f4efe7;
 }
 
-.kun-lead { font-size: clamp(1.05rem, 1.6vw, 1.5rem); line-height: 1.25; color: #b1a696; }
+.kun-title {
+	font-size: var(--fs-h2);
+	line-height: 0.98;
+	font-weight: 500;
+	letter-spacing: -0.02em;
+	color: #f4efe7;
+}
+
+.kun-lead { font-size: var(--fs-lead); line-height: 1.35; color: #b1a696; }
 
 .kun-more {
 	display: inline-flex;
@@ -595,3 +607,37 @@ a.kun-tile:hover { background: #312d2a; }
 .kun-field input { flex: 1; min-width: 0; background: transparent; outline: none; padding: 0.7rem 0; color: #2a2725; }
 .kun-field input::placeholder { color: #8a7f70; }
 .kun-field .kun-btn { background: #2a2725; color: #f4efe7; }
+
+/* Search on the cream menu panel: the same pieces, inverted */
+.kun-search-light .kun-chip { border-color: #2a2725; color: #2a2725; }
+.kun-search-light .kun-chip:hover { background: #2a2725; color: #f4efe7; }
+.kun-search-light .kun-chip[aria-pressed="true"] { background: #2a2725; border-color: #2a2725; color: #f4efe7; }
+.kun-search-light .kun-field { background: #2a2725; }
+.kun-search-light .kun-field input { color: #f4efe7; }
+.kun-search-light .kun-field input::placeholder { color: #b1a696; }
+.kun-search-light .kun-field .kun-btn { background: #f4efe7; color: #2a2725; }
+
+/* Newsroom ticker: two copies of the run slide by half their width, forever */
+.kun-ticker { mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.kun-ticker-track { animation: kun-ticker 45s linear infinite; }
+.kun-ticker:hover .kun-ticker-track { animation-play-state: paused; }
+@keyframes kun-ticker { to { transform: translateX(-50%); } }
+.kun-pulse { animation: kun-pulse 2s ease-in-out infinite; }
+@keyframes kun-pulse { 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) {
+	.kun-ticker { overflow-x: auto; }
+	.kun-ticker-track, .kun-pulse { animation: none; }
+}
+
+/* Print: inner pages as plain text on white */
+@media print {
+	body, #smooth-content { background: #fff !important; color: #000 !important; }
+	.page-hero, footer, #site-menu, button[aria-controls="site-menu"] { display: none !important; }
+	.kun-prose, .kun-prose * { color: #000 !important; }
+}
+
+.kun-prose.kun-columns { max-width: none; }
+
+/* Resource descriptions in listing rows */
+.kun-prose.kun-prose-sm { font-size: 0.92rem; line-height: 1.6; max-width: 48rem; }
+.kun-prose.kun-prose-sm > * + * { margin-top: 0.6em; }

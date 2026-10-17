@@ -13,6 +13,14 @@ export const media = (p) => {
     return import.meta.env.BASE_URL + p.replace(/^\//, "");
 };
 
+// HTML bodies link media and pages from the site root ("/media/...", "/iletisim"); prefix the
+// deploy base so they also work when the site is served from a sub-path (GitHub Pages).
+export const withBase = (html = "") => {
+    const base = import.meta.env.BASE_URL;
+    if (base === "/") return html;
+    return html.replace(/(src|href)="\/(?!\/)/g, `$1="${base}`);
+};
+
 const pad = (n) => String(n).padStart(2, "0");
 
 // Local calendar date, so a trial ending "15 Kasım" stays active all of 15 Kasım in Türkiye.

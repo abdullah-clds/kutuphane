@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useGSAP } from "@gsap/react";
 import AnimateBtn from "../Buttons/AnimateBtn";
+import SearchBox from "../Search/SearchBox";
 import SmartLink from "../Buttons/SmartLink";
 import { NAV_GROUPS, NAV_PRIMARY } from "../../data/nav";
 import { media } from "../../lib/content";
@@ -34,7 +35,7 @@ const Navbar = () => {
     if (open) {
       smoother?.paused(true);
       reduceMotion() ? tl.progress(1) : tl.timeScale(1).play();
-      const first = panelRef.current.querySelector("a");
+      const first = panelRef.current.querySelector("input[type=search]") || panelRef.current.querySelector("a");
       setTimeout(() => first?.focus({ preventScroll: true }), reduceMotion() ? 0 : 450);
     } else {
       smoother?.paused(false);
@@ -51,7 +52,7 @@ const Navbar = () => {
       buttonRef.current?.focus();
     }
     if (e.key === "Tab") {
-      const focusables = [...panelRef.current.querySelectorAll("a, button")];
+      const focusables = [...panelRef.current.querySelectorAll("a, button, input:not([type=hidden])")];
       focusables.push(buttonRef.current);
       const i = focusables.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0) { e.preventDefault(); focusables.at(-1).focus(); }
@@ -76,6 +77,10 @@ const Navbar = () => {
         data-lenis-prevent
       >
         <div className="p-6 md:p-10">
+          <div className="border-b border-[#2a2725]/15 pb-6 mb-6">
+            <p className="text-[.7rem] font-bold uppercase tracking-[0.12em] text-[#8a7f70] mb-3">Kaynak tarama</p>
+            <div className="max-w-[44rem]"><SearchBox size="md" tone="light" /></div>
+          </div>
           <div className="flex items-start justify-between gap-6 border-b border-[#2a2725]/15 pb-6">
             <ul className="flex flex-wrap gap-x-8 gap-y-1">
               {NAV_PRIMARY.map((item) => (

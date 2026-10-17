@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import PageHero from "../../components/Page/PageHero";
-import PageAside from "../../components/Page/PageAside";
+import PageLayout from "../../components/Page/PageLayout";
 import Prose from "../../components/Page/Prose";
 import useReveal from "../../components/Page/useReveal";
 import { findPage, libraries, media } from "../../lib/content";
@@ -47,10 +47,9 @@ const LibrariesPage = () => {
                 aside={<>Mustafapaşa ve Ürgüp yerleşkeleri</>}
             />
 
-            <div className="px-6 md:px-8 pb-20 grid gap-14 lg:grid-cols-12">
-                <div className="lg:col-span-3"><PageAside updated={page.updated} sourceUrl={page.sourceUrl} /></div>
-                <div className="lg:col-span-8 lg:col-start-5" data-reveal><Prose html={introMain} /></div>
-            </div>
+            <PageLayout updated={page.updated} footer={null} className="pb-20">
+                <Prose html={introMain} />
+            </PageLayout>
 
             <section aria-label="Kütüphaneler" className="px-2 flex flex-col gap-2">
                 {items.map((lib, i) => {
@@ -88,7 +87,7 @@ const LibrariesPage = () => {
                 })}
             </section>
 
-            <section aria-label="Diğer kitaplıklar" className="px-6 md:px-8 py-24 grid gap-14 lg:grid-cols-12">
+            <section aria-label="Diğer kitaplıklar" className="kun-wrap py-24 grid gap-14 lg:grid-cols-12">
                 <h2 className="lg:col-span-3 text-[.7rem] font-bold text-[#eae5dd]" data-reveal>Diğer kitaplıklar ve özel koleksiyonlar</h2>
                 <div className="lg:col-span-8 lg:col-start-5 flex flex-col gap-10" data-reveal>
                     {libraries.otherHours.map((h) => (

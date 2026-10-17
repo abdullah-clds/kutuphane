@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { withBase } from "../../lib/content";
 
 /**
  * Renders migrated page HTML (generated at build time from our own content files).
@@ -10,14 +11,16 @@ const Prose = ({ html, className = "" }) => {
     const onClick = (e) => {
         const a = e.target.closest("a");
         if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey) return;
-        const href = a.getAttribute("href");
-        if (href?.startsWith("/") && !href.startsWith("/media/")) {
+        const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+        const raw = a.getAttribute("href") || "";
+        const href = base && raw.startsWith(`${base}/`) ? raw.slice(base.length) : raw;
+        if (href.startsWith("/") && !href.startsWith("/media/")) {
             e.preventDefault();
             navigate(href);
         }
     };
 
-    return <div className={`kun-prose ${className}`} onClick={onClick} dangerouslySetInnerHTML={{ __html: html }} />;
+    return <div className={`kun-prose ${className}`} onClick={onClick} dangerouslySetInnerHTML={{ __html: withBase(html) }} />;
 };
 
 export default Prose;

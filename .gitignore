@@ -2,3 +2,7 @@ node_modules
 .DS_Store
 dist
 *.log
+
+# Local editor / agent settings
+.kiro/
+.vscode/

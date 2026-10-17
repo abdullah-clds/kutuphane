@@ -16,7 +16,7 @@ const SearchPanel = ({ initial = "ebsco", tone = "dark" }) => {
 
     return (
         <div>
-            <div role="radiogroup" aria-label="Arama yapılacak sistem" className="flex flex-wrap gap-2">
+            <div role="radiogroup" aria-label="Arama yapılacak sistem" className={`inline-flex rounded-full p-1 text-[0.9rem] ${onDark ? "bg-[#121111] ring-1 ring-inset ring-[#2f2c29]" : "bg-[#2a2725]/10"}`}>
                 {Object.entries(SEARCH).map(([key, s]) => {
                     const active = key === scope;
                     return (
@@ -26,15 +26,16 @@ const SearchPanel = ({ initial = "ebsco", tone = "dark" }) => {
                             role="radio"
                             aria-checked={active}
                             onClick={() => setScope(key)}
-                            className={`border-[1px] rounded-full px-[20px] py-[4px] lg:text-[1.1rem] text-[1rem] transition-colors duration-300 ${active
-                                ? (onDark ? "bg-[#f4efe7] border-[#f4efe7] text-[#2a2725]" : "bg-[#2a2725] border-[#2a2725] text-[#f4efe7]")
-                                : (onDark ? "border-[#b1a696] text-[#b1a696] hover:text-[#f4efe7] hover:border-[#f4efe7]" : "border-[#2a2725]/40 text-[#2a2725]")}`}
+                            className={`rounded-full px-4 py-2 transition-colors duration-300 ${active
+                                ? (onDark ? "bg-[#f4efe7] text-[#2a2725]" : "bg-[#2a2725] text-[#f4efe7]")
+                                : (onDark ? "text-[#b1a696] hover:text-[#f4efe7]" : "text-[#2a2725]")}`}
                         >
-                            {s.label}
+                            <span className="sm:hidden">{s.short}</span><span className="hidden sm:inline">{s.label}</span>
                         </button>
                     );
                 })}
             </div>
+            <p className={`mt-4 text-[0.95rem] leading-relaxed ${onDark ? "text-[#b1a696]" : "text-[#5e574f]"}`}>{cfg.text}</p>
 
             <form action={cfg.action} method="GET" target="_blank" className="mt-5" role="search" aria-label={cfg.label}>
                 {Object.entries(cfg.hidden).map(([k, v]) => <input key={k} type="hidden" name={k} value={v} />)}
@@ -54,7 +55,7 @@ const SearchPanel = ({ initial = "ebsco", tone = "dark" }) => {
                         <MdArrowOutward aria-hidden="true" className="w-8 h-8 p-1.5 rounded-full bg-[#f4efe7] text-[#2a2725] transition-transform duration-500 group-hover:rotate-45" />
                     </button>
                 </div>
-                <p className={`mt-3 text-[0.7rem] ${onDark ? "text-[#b1a696]" : "text-[#5e574f]"}`}>
+                <p className={`mt-3 text-[0.78rem] ${onDark ? "text-[#8a8073]" : "text-[#5e574f]"}`}>
                     {cfg.system} · sonuçlar yeni sekmede açılır ·{" "}
                     <a href={cfg.home} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">gelişmiş arama</a>
                 </p>
