@@ -1,6 +1,8 @@
 # Kapadokya Üniversitesi Kütüphanesi
 
-kutuphane.kapadokya.edu.tr için yeni site. Tasarım ve hareket dili **Capsule** temasından (React + Vite + Tailwind 4 + GSAP ScrollSmoother/ScrollTrigger) korunarak, eski WordPress sitesinin tüm içeriği taşındı.
+kutuphane.kapadokya.edu.tr için yeni site.
+
+**Canlı:** https://abdullah-clds.github.io/kutuphane/ · **Değişiklik kaydetme ve yayına alma:** [docs/YAYIN.md](docs/YAYIN.md) Tasarım ve hareket dili **Capsule** temasından (React + Vite + Tailwind 4 + GSAP ScrollSmoother/ScrollTrigger) korunarak, eski WordPress sitesinin tüm içeriği taşındı.
 
 ```bash
 cd frontend
